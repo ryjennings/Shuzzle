@@ -1,0 +1,201 @@
+// !$*UTF8*$!
+{
+	1D3623240D0F684500981E51 /* FormicAppDelegate.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1047, 1420}}";
+			sepNavSelRange = "{633, 0}";
+			sepNavVisRange = "{0, 633}";
+			sepNavWindowFrame = "{{1513, 88}, {1106, 1477}}";
+		};
+	};
+	1D3623250D0F684500981E51 /* FormicAppDelegate.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1047, 1420}}";
+			sepNavSelRange = "{1258, 0}";
+			sepNavVisRange = "{0, 1440}";
+			sepNavWindowFrame = "{{137, 101}, {1106, 1477}}";
+		};
+	};
+	1D6058900D05DD3D006BFB54 /* Formic */ = {
+		activeExec = 0;
+		executables = (
+			D76F23300F167BD400D5D966 /* Formic */,
+		);
+	};
+	28D7ACF60DDB3853001CB0EB /* FormicViewController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1047, 1418}}";
+			sepNavSelRange = "{910, 0}";
+			sepNavVisRange = "{0, 955}";
+			sepNavWindowFrame = "{{1176, 103}, {1106, 1475}}";
+		};
+	};
+	28D7ACF70DDB3853001CB0EB /* FormicViewController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {989, 4215}}";
+			sepNavSelRange = "{4648, 0}";
+			sepNavVisRange = "{4149, 662}";
+			sepNavWindowFrame = "{{14, 103}, {1106, 1475}}";
+		};
+	};
+	29B97313FDCFA39411CA2CEA /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = D76F23300F167BD400D5D966 /* Formic */;
+		activeSDKPreference = iphonesimulator2.2;
+		activeTarget = 1D6058900D05DD3D006BFB54 /* Formic */;
+		addToTargets = (
+			1D6058900D05DD3D006BFB54 /* Formic */,
+		);
+		breakpoints = (
+		);
+		codeSenseManager = D76F23390F167BF400D5D966 /* Code sense */;
+		executables = (
+			D76F23300F167BD400D5D966 /* Formic */,
+		);
+		perUserDictionary = {
+			"PBXConfiguration.PBXBreakpointsDataSource.v1:1CA1AED706398EBD00589147" = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = 1;
+				PBXFileTableDataSourceColumnSortingKey = PBXBreakpointsDataSource_BreakpointID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					20,
+					198,
+					20,
+					99,
+					99,
+					29,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXBreakpointsDataSource_ActionID,
+					PBXBreakpointsDataSource_TypeID,
+					PBXBreakpointsDataSource_BreakpointID,
+					PBXBreakpointsDataSource_UseID,
+					PBXBreakpointsDataSource_LocationID,
+					PBXBreakpointsDataSource_ConditionID,
+					PBXBreakpointsDataSource_IgnoreCountID,
+					PBXBreakpointsDataSource_ContinueID,
+				);
+			};
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					315,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 257270714;
+			PBXWorkspaceStateSaveDate = 257270714;
+		};
+		sourceControlManager = D76F23380F167BF400D5D966 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	8D1107310486CEB800E47090 /* Info.plist */ = {
+		uiCtxt = {
+			sepNavWindowFrame = "{{84, 632}, {1106, 878}}";
+		};
+	};
+	D729A1CC0F267AC60028F429 /* FormicTimerView.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1047, 821}}";
+			sepNavSelRange = "{804, 0}";
+			sepNavVisRange = "{0, 878}";
+			sepNavWindowFrame = "{{15, 695}, {1106, 878}}";
+		};
+	};
+	D729A1CD0F267AC60028F429 /* FormicTimerView.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1047, 821}}";
+			sepNavSelRange = "{296, 0}";
+			sepNavVisRange = "{0, 351}";
+			sepNavWindowFrame = "{{38, 674}, {1106, 878}}";
+		};
+	};
+	D76F23300F167BD400D5D966 /* Formic */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 1;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = Formic;
+		savedGlobals = {
+		};
+		sourceDirectories = (
+		);
+		variableFormatDictionary = {
+		};
+	};
+	D76F23380F167BF400D5D966 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+		};
+	};
+	D76F23390F167BF400D5D966 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	D79287780F1A6A0A00418AF9 /* FormicView.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1047, 1420}}";
+			sepNavSelRange = "{390, 15}";
+			sepNavVisRange = "{0, 425}";
+			sepNavWindowFrame = "{{537, 101}, {1106, 1477}}";
+		};
+	};
+	D79287790F1A6A0A00418AF9 /* FormicView.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1047, 1515}}";
+			sepNavSelRange = "{492, 0}";
+			sepNavVisRange = "{132, 2257}";
+			sepNavWindowFrame = "{{283, 101}, {1106, 1477}}";
+		};
+	};
+	D792878D0F1A6AFD00418AF9 /* FormicGame.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {978, 923}}";
+			sepNavSelRange = "{1033, 0}";
+			sepNavVisRange = "{0, 1126}";
+			sepNavWindowFrame = "{{568, 101}, {1106, 1477}}";
+		};
+	};
+	D792878E0F1A6AFD00418AF9 /* FormicGame.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1047, 3690}}";
+			sepNavSelRange = "{4213, 1505}";
+			sepNavVisRange = "{3028, 2696}";
+			sepNavWindowFrame = "{{853, 103}, {1106, 1475}}";
+		};
+	};
+}
