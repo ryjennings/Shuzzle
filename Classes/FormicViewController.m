@@ -6,6 +6,7 @@
 //  Copyright 2010 NorthBound Media, Inc (TM). All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import <GameKit/GameKit.h>
 #import "FormicViewController.h"
 #import "FormicTimerView.h"
@@ -37,14 +38,14 @@
 	}
 	
 	if ([[AppDelegate game] gameLevel] == FGGameLevelBlitz) {
-		mainBackground.image = [UIImage imageNamed:@"blitz.png"];
+		mainBackground.image = [UIImage imageNamed:@"blitz-1136.png"];
 		mLivesView.text = @"1:00";
-		mLivesView.font = [UIFont boldSystemFontOfSize:28];
+		mLivesView.font = SCORE_FONT_SIZE_SM;
 		mLivesZoomView.text = @"1:00";
-		mLivesZoomView.font = [UIFont boldSystemFontOfSize:28];
+		mLivesZoomView.font = SCORE_FONT_SIZE_SM;
 		lowerLabel.text = @"CLOCK";
 	} else {
-		mainBackground.image = [UIImage imageNamed:@"main.png"];
+		mainBackground.image = [UIImage imageNamed:@"main-1136.png"];
 		mLivesZoomView.text = @"0";
 		mLivesZoomView.font = SCORE_FONT_SIZE_LG;
 		mLivesView.text = @"0";
@@ -65,6 +66,17 @@
 	[[AppDelegate game] completelyResetPowerups];
 
 	consecutiveGames = 1;
+    
+    [timewarp.layer addAnimation:[AppDelegate rotationAnimation] forKey:@"spin"];
+    
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"isGameUnlocked"]) {
+        btnPowerup1.enabled = NO;
+        btnPowerup2.enabled = NO;
+        btnPowerup3.enabled = NO;
+    }
+    
+    [self setupModeAnnouncer];
+    autoWinCount = 0;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -81,16 +93,10 @@
 - (void)viewDidLoad
 {
 	viewHasAppearedForTheFirstTime = NO;
-	
-	self.view.transform = CGAffineTransformIdentity;
-	self.view.transform = CGAffineTransformMakeRotation(degreesToRadians(90));
-	self.view.bounds = CGRectMake(0.0, 0.0, 480, 320);
-	
+		
 	gameOverPopup = nil;
 	powerupIndicator = nil;
-	
-	CGRect	rect;
-	
+		
 	[(FormicView *)[self view] viewDidLoad];
 	
 	CGPoint center = [[self view] center];
@@ -101,9 +107,8 @@
 	[accessoryView addSubview:mTimerView];
 	
 	// add the lives and points views
-	rect = CGRectMake (392.0, 240.0, 105.0, 74.0);
-	mLivesView = [[RRSGlowLabel alloc] initWithFrame:rect];
-	mLivesView.textAlignment = UITextAlignmentCenter;
+	mLivesView = [[RRSGlowLabel alloc] initWithFrame:CGRectMake(self.view.frame.size.height - 88.0, 240.0, 105.0, 74.0)];
+	mLivesView.textAlignment = NSTextAlignmentCenter;
 	mLivesView.textColor = [UIColor whiteColor];
 	mLivesView.backgroundColor = [UIColor clearColor];
 	mLivesView.glowColor = [UIColor colorWithRed:0.8 green:1.0 blue:1.0 alpha:1.0];
@@ -111,9 +116,8 @@
     mLivesView.glowAmount = 50.0;
 	[accessoryView addSubview:mLivesView];
 
-	rect = CGRectMake (392.0, 240.0, 105.0, 74.0);
-	mLivesZoomView = [[RRSGlowLabel alloc] initWithFrame:rect];
-	mLivesZoomView.textAlignment = UITextAlignmentCenter;
+	mLivesZoomView = [[RRSGlowLabel alloc] initWithFrame:mLivesView.frame];
+	mLivesZoomView.textAlignment = NSTextAlignmentCenter;
 	mLivesZoomView.textColor = [UIColor whiteColor];
 	mLivesZoomView.backgroundColor = [UIColor clearColor];
 	mLivesZoomView.transform = CGAffineTransformIdentity;
@@ -123,12 +127,11 @@
     mLivesZoomView.glowAmount = 50.0;
 	[accessoryView addSubview:mLivesZoomView];
 	
-	rect = CGRectMake (392.0, -10.0, 105.0, 74.0);
-	mPointsView = [[RRSGlowLabel alloc] initWithFrame:rect];
+	mPointsView = [[RRSGlowLabel alloc] initWithFrame:CGRectMake(self.view.frame.size.height - 88.0, -10.0, 105.0, 74.0)];
 	mPointsView.text = @"0";
 	mPointsView.adjustsFontSizeToFitWidth = YES;
 	mPointsView.font = SCORE_FONT_SIZE_LG;
-	mPointsView.textAlignment = UITextAlignmentCenter;
+	mPointsView.textAlignment = NSTextAlignmentCenter;
 	mPointsView.textColor = [UIColor whiteColor];
 	mPointsView.backgroundColor = [UIColor clearColor];
 	mPointsView.glowColor = [UIColor colorWithRed:0.8 green:1.0 blue:1.0 alpha:1.0];
@@ -136,11 +139,10 @@
     mPointsView.glowAmount = 50.0;
 	[accessoryView addSubview:mPointsView];
 	
-	rect = CGRectMake (407.0, -10.0, 75.0, 74.0);
-	mPointsZoomView = [[RRSGlowLabel alloc] initWithFrame:rect];
+	mPointsZoomView = [[RRSGlowLabel alloc] initWithFrame:mPointsView.frame];
 	mPointsZoomView.text = @"0";
 	mPointsZoomView.font = SCORE_FONT_SIZE_LG;
-	mPointsZoomView.textAlignment = UITextAlignmentCenter;
+	mPointsZoomView.textAlignment = NSTextAlignmentCenter;
 	mPointsZoomView.textColor = [UIColor whiteColor];
 	mPointsZoomView.backgroundColor = [UIColor clearColor];
 	mPointsZoomView.transform = CGAffineTransformIdentity;
@@ -151,7 +153,7 @@
 	[accessoryView addSubview:mPointsZoomView];
 
 	countdownTimer = [[CountdownTimer alloc] initWithFrame:CGRectMake(0.0, 0.0, 100.0, 100.0)];
-	countdownTimer.center = CGPointMake(240.0, 160.0);
+	countdownTimer.center = CGPointMake(self.view.center.y, self.view.center.x);
 	countdownTimer.backgroundColor = [UIColor clearColor];
 	[accessoryView addSubview:countdownTimer];
 	
@@ -168,6 +170,41 @@
 			
 	tiltHit = YES;
 	outOfPosition = NO;
+}
+
+- (void)setupModeAnnouncer {
+    UIImage *gameModeImage;
+    switch ([[AppDelegate game] gameLevel]) {
+        case FGGameLevelEasy:
+            gameModeImage = [UIImage imageNamed:@"easy.png"];
+            break;
+        case FGGameLevelMedium:
+            gameModeImage = [UIImage imageNamed:@"medium.png"];
+            break;
+        case FGGameLevelHard:
+            gameModeImage = [UIImage imageNamed:@"hard.png"];
+            break;
+        case FGGameLevelExtreme:
+            gameModeImage = [UIImage imageNamed:@"extreme.png"];
+            break;
+        case FGGameLevelBlitz:
+            gameModeImage = [UIImage imageNamed:@"blitz.png"];
+            break;
+        default:
+            break;
+    }
+    modeImageView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+    modeImageView.alpha = 1.0;
+    modeImageView.image = gameModeImage;
+    [UIView animateWithDuration:0.25
+                          delay:0.6 options:nil
+                     animations:^{
+                         modeImageView.transform = CGAffineTransformMakeScale(0.7, 0.7);
+                         modeImageView.alpha = 0.0;
+                     }
+                     completion:^(BOOL finished) {
+//                         [modeImageView removeFromSuperview];
+                     }];
 }
 
 - (void)announceGoldenShape
@@ -206,7 +243,7 @@
 - (void)showGameOverPopup
 {
 	if (blackness == nil) {
-		blackness = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 480.0, 320.0)];
+		blackness = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.height, self.view.frame.size.width)];
 	}
 	blackness.backgroundColor = [UIColor blackColor];
 	blackness.alpha = 0.0;
@@ -227,10 +264,7 @@
 			[gameOverPopup.btn2 setTitle:@"Replay" forState:UIControlStateNormal];
 			[gameOverPopup.btn3 setTitle:@"Submit Score" forState:UIControlStateNormal];
 			gameOverPopup.popupFrame.image = [UIImage imageNamed:@"gameover-frame.png"];
-#ifdef DEMO_MODE
-			gameOverPopup.btn3.enabled = NO;
-#endif
-			if (![AppDelegate connectedToGameCenter]) {
+			if (![AppDelegate connectedToGameCenter] || ![[NSUserDefaults standardUserDefaults] objectForKey:@"isGameUnlocked"]) {
 				gameOverPopup.btn3.enabled = NO;
 			} else {
 				gameOverPopup.btn3.enabled = YES;
@@ -297,6 +331,8 @@
 				break;
 			case FGPowerupUniformity:
 				powerupIndicator.label.text = @"Uniformity";
+			case FGPowerupAutowin:
+				powerupIndicator.label.text = @"Autowin";
 				arrowImage = [UIImage imageNamed:@"puDisplay-arrow-purple.png"];
 				break;
 			case FGPowerupRadiation:
@@ -319,6 +355,10 @@
 				}
 				arrowImage = [UIImage imageNamed:@"puDisplay-arrow-green.png"];
 				break;
+            case FGPowerupExtraTime:
+            case FGPowerupFreeze:
+            case FGPowerupNone:
+                break;
 		}
 		
 		powerupIndicator.arrow1.image = arrowImage;
@@ -377,6 +417,8 @@
 {
 	NSString	*filename;
 	
+    mCenterViewType = shape;
+    
 	// remove any leftovers
 	[mCenterView removeFromSuperview];
 	[mCenterView release];
@@ -436,7 +478,7 @@
 	
 	// animate it there
 	[UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:ANIM_NORMAL];
+	[UIView setAnimationDuration:(([[AppDelegate game] powerupInUse] == FGPowerupAutowin) ? 0.55 : ANIM_NORMAL)];
 	[UIView setAnimationDelegate:self];
 	[UIView setAnimationDidStopSelector:@selector(moveCenterToCircleStop)];
 	mCenterView.alpha = 1.0;
@@ -447,7 +489,7 @@
 	// transfer and schedule finishing up
 	mMovedView = mCenterView;
 	mCenterView = nil;
-	[self performSelector:@selector(clearCircle:) withObject:[NSNumber numberWithInt:circle] afterDelay:ANIM_NORMAL];
+	[self performSelector:@selector(clearCircle:) withObject:[NSNumber numberWithInt:circle] afterDelay:(([[AppDelegate game] powerupInUse] == FGPowerupAutowin) ? 0.55 : ANIM_NORMAL)];
 }
 
 - (void)moveCenterToCircleStop {
@@ -487,7 +529,9 @@
 {
 	NSString	*filename;
 	
-	// remove any leftovers
+    mCircleViewTypes[circle] = shape;
+
+        // remove any leftovers
 	[mCircleView[circle] removeFromSuperview];
 	[mCircleView[circle] release];
 	mCircleView[circle] = nil;
@@ -503,7 +547,7 @@
 	else {
 		filename = [NSString stringWithFormat:@"piece-%d-%d-0.png", color, shape];
 	}
-	
+	   
 	mCircleView[circle] = [[UIImageView alloc] initWithImage:[UIImage imageNamed:filename]];
 	mCircleView[circle].center = [(FormicView *)[self view] centerForCircle:circle];
 	mCircleView[circle].alpha = 0.0;
@@ -636,12 +680,9 @@
 {	
 	[self showGameOverPopup];
 	[AppDelegate playGameOverMusic];
-#ifdef DEMO_MODE
-#else
 	if (consecutiveGames == kRequirementBackToBack) {
 		[[AppDelegate game] submitBackToBackAchievement];
 	}
-#endif
 	pulsingLivesCritical = NO;
 	btnPause.enabled = NO;
 	[[AppDelegate game] eraseSavedGame]; // erase any previous saved game
@@ -695,8 +736,10 @@
 {
 	if ([[AppDelegate game] mState] == FGGameStateOver) {
 		// Submit score
-		[AppDelegate showLoadingViewWithLabel:@"Accessing Game Center"];
-		[[AppDelegate game] performSelector:@selector(authenticateLocalUserAndSubmitScore) withObject:nil afterDelay:0.5];
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"isGameUnlocked"]) {
+            [AppDelegate showLoadingViewWithLabel:@"Accessing Game Center"];
+            [[AppDelegate game] performSelector:@selector(authenticateLocalUserAndSubmitScore) withObject:nil afterDelay:0.5];
+        }
 	} else {
 		// Resume
 		[self removeGameOverPopup];
@@ -723,8 +766,10 @@
 				consecutiveGames++;
 				break;
 			case 2: // submit score
-				[AppDelegate showLoadingViewWithLabel:@"Accessing Game Center"];
-				[[AppDelegate game] performSelector:@selector(authenticateLocalUserAndSubmitScore) withObject:nil afterDelay:0.5];
+                if ([[NSUserDefaults standardUserDefaults] objectForKey:@"isGameUnlocked"]) {
+                    [AppDelegate showLoadingViewWithLabel:@"Accessing Game Center"];
+                    [[AppDelegate game] performSelector:@selector(authenticateLocalUserAndSubmitScore) withObject:nil afterDelay:0.5];
+                }
 				break;
 		}
 	} else if (alertView == pauseAlert) { // pause alert
@@ -921,7 +966,9 @@
 						 fadeView.alpha = 1.0;
 					 }
 					 completion:^(BOOL finished){
-						 btn.enabled = YES;
+                         if ([[NSUserDefaults standardUserDefaults] objectForKey:@"isGameUnlocked"]) {
+                             btn.enabled = YES;
+                         }
 						 btn.showsTouchWhenHighlighted = YES;
 						 [fadeView removeFromSuperview];
 						 [fadeView release];
@@ -942,10 +989,7 @@
 
 - (void)endPowerup
 {
-#ifdef DEMO_MODE
-#else
 	[self hidePowerupIndicator];
-#endif
 	pulsingPowerUpButton = NO;
 
 	[UIView beginAnimations:nil context:nil];
@@ -1030,6 +1074,7 @@
 			btnPowerup3.enabled = NO;
 			break;
 	}
+    NSLog(@"p = %d", p);
 }
 
 - (void)restoreSavedPowerups:(NSArray *)pu
@@ -1089,7 +1134,7 @@
 	if ([[AppDelegate game] powerupInUse] == FGPowerupRadiation) {
 		[[AppDelegate game] stopTimer];
 		[[AppDelegate game] restartTimerAfterPause:1.25];
-		bgPowerup.image = [UIImage imageNamed:@"radiation.png"];
+		bgPowerup.image = [UIImage imageNamed:@"radiation-1136.png"];
 		for (int i = 0; i < GAME_CIRCLES; i++)
 			[self performSelector:@selector(localNewPieceForCircle:) 
 					   withObject:[NSNumber numberWithInteger:i] 
@@ -1102,7 +1147,7 @@
 	// Doubler
 	//
 	else if ([[AppDelegate game] powerupInUse] == FGPowerupDoubler) {
-		bgPowerup.image = [UIImage imageNamed:@"doubler.png"];
+		bgPowerup.image = [UIImage imageNamed:@"doubler-1136.png"];
 		[self performSelector:@selector(endPowerup) withObject:nil afterDelay:10.28];
 		soundLoop = 0;
 		[AppDelegate playDoublePointsSound];
@@ -1112,7 +1157,7 @@
 	// Slowdown / Freeze
 	//
 	else if ([[AppDelegate game] powerupInUse] == FGPowerupSlowdown) {
-		bgPowerup.image = [UIImage imageNamed:@"slowdown.png"];
+		bgPowerup.image = [UIImage imageNamed:@"slowdown-1136.png"];
 		if ([[AppDelegate game] gameLevel] == FGGameLevelBlitz)  {
 			[[AppDelegate game] freezeClock];
 		} else {
@@ -1129,7 +1174,7 @@
 	else if ([[AppDelegate game] powerupInUse] == FGPowerupExtraLife) {
 		[[AppDelegate game] stopTimer];
 		[[AppDelegate game] restartTimerAfterPause:1.25];
-		bgPowerup.image = [UIImage imageNamed:@"doubler.png"];
+		bgPowerup.image = [UIImage imageNamed:@"doubler-1136.png"];
 		if ([[AppDelegate game] gameLevel] == FGGameLevelBlitz) {
 			[[AppDelegate game] addExtraSeconds];
 		} else {
@@ -1139,19 +1184,36 @@
 		[AppDelegate playExtraLifeSound];
 	}
 	
-	//
-	// Uniformity
-	//
+    //
+    // Uniformity
+    //
 	else if ([[AppDelegate game] powerupInUse] == FGPowerupUniformity) {
-		bgPowerup.image = [UIImage imageNamed:@"uniformity.png"];
+		bgPowerup.image = [UIImage imageNamed:@"uniformity-1136.png"];
 		for (int i = 0; i < GAME_CIRCLES; i++)
-			[self performSelector:@selector(localNewPieceForCircle:) 
-					   withObject:[NSNumber numberWithInteger:i] 
+			[self performSelector:@selector(localNewPieceForCircle:)
+					   withObject:[NSNumber numberWithInteger:i]
 					   afterDelay:((float)i*0.15)];
 		[[AppDelegate game] performSelector:@selector(replaceCenterShapeForUniformityPowerup) withObject:nil afterDelay:0.9];
 		[self performSelector:@selector(endPowerup) withObject:nil afterDelay:10.0];
 		[AppDelegate playUniformitySound];
 	}
+	
+    //
+    // Autowin
+    //
+	else if ([[AppDelegate game] powerupInUse] == FGPowerupAutowin) {
+        self.view.userInteractionEnabled = NO;
+		bgPowerup.image = [UIImage imageNamed:@"uniformity-1136.png"];
+		for (int i = 0; i < GAME_CIRCLES; i++)
+			[self performSelector:@selector(localNewPieceForCircle:)
+					   withObject:[NSNumber numberWithInteger:i]
+					   afterDelay:((float)i*0.15)];
+		[[AppDelegate game] performSelector:@selector(replaceCenterShapeForUniformityPowerup) withObject:nil afterDelay:0.9];
+		[AppDelegate playUniformitySound];
+        
+        autoWinCount = 0;
+        [self performSelector:@selector(autoWin) withObject:nil afterDelay:1.0];
+    }
 	
 	// "Disable" the other powerup buttons and perform other necessary animations
 	[UIView beginAnimations:nil context:nil];
@@ -1172,10 +1234,25 @@
 	btnPowerup1.showsTouchWhenHighlighted = NO;
 	btnPowerup2.showsTouchWhenHighlighted = NO;
 	btnPowerup3.showsTouchWhenHighlighted = NO;
-#ifdef DEMO_MODE
-#else
 	[self showPowerupIndicator];
-#endif
+}
+
+- (void)autoWin {
+    autoWinCount++;
+    for (unsigned i = 0; i < GAME_CIRCLES; i++) {
+        if (mCircleViewTypes[i] == mCenterViewType) {
+            [[AppDelegate game] moveCenterToCircle:i];
+            [[AppDelegate game] newCenterPiece];
+        }
+    }
+    
+    if (autoWinCount < 5) {
+        [self performSelector:@selector(autoWin) withObject:nil afterDelay:1.0];
+    } else {
+        autoWinCount = 0;
+        [self endPowerup];
+        self.view.userInteractionEnabled = YES;
+    }
 }
 
 #pragma mark -
@@ -1200,12 +1277,6 @@
 
 - (void)pulseLivesCritical
 {
-	NSLog(@"pulseLivesCritical");
-//	[UIView beginAnimations:nil context:nil];
-//	[UIView setAnimationDuration:1.0];
-//	[UIView setAnimationDelegate:self];
-//	livesCritical.alpha = (livesCritical.alpha == 1.0 || !pulsingLivesCritical) ? 0.0 : 1.0;
-//	[UIView commitAnimations];
 	[UIView animateWithDuration:1.0
 						  delay:0.0
 						options:UIViewAnimationOptionAllowUserInteraction
@@ -1217,9 +1288,6 @@
 							 [self pulseLivesCritical];
 						 }
 					 }];
-//	if (pulsingLivesCritical) {
-//		[self performSelector:@selector(pulseLivesCritical) withObject:nil afterDelay:1.0];
-//	}
 }
 
 - (void)debugMessage:(NSString *)msg

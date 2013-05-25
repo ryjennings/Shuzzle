@@ -8,23 +8,39 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainMenuViewController : UIViewController
-{
+@interface MainMenuViewController : UIViewController {
 	IBOutlet UIButton *buttonPlay;
 	IBOutlet UIButton *buttonHighscores;
 	IBOutlet UIButton *buttonInstructions;
 	IBOutlet UIButton *buttonSettings;
-	IBOutlet UIButton *buttonControlTouch;
-	IBOutlet UIButton *buttonControlTilt;
-	
-	UIAlertView *demoScoresAlert;
-	UIAlertView *demoIntroAlert;
+    IBOutlet UIImageView *timewarp;
+    
+    IBOutlet UIView *mainButtons;
+    
+    IBOutlet UIView *unlockGroup;
+    IBOutlet UIButton *unlockButton;
+    IBOutlet UILabel *unlockLabel;
+    IBOutlet UILabel *unlockErrorLabel;
+    
+    IBOutlet UIView *playNowGroup;
+    IBOutlet UIButton *playNowButton;
+    IBOutlet UILabel *playNowLabel;
+    
+    IBOutlet UIImageView *instructionsWell;
+    IBOutlet UIImageView *settingsWell;
+    IBOutlet UIImageView *shuzzleSmall;
+    IBOutlet UIImageView *shuzzleBig;
+    
+    int scores[5];
+    int activeIndex;
 }
 
 - (IBAction)onButtonPlay;
 - (IBAction)onButtonHighscores;
 - (IBAction)onButtonInstructions;
 - (IBAction)onButtonSettings;
-- (IBAction)onButtonControls:(id)sender;
+
+- (IBAction)didTapUnlockButton:(id)sender;
+- (IBAction)didTapPlayNowButton:(id)sender;
 
 @end

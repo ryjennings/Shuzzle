@@ -10,6 +10,12 @@
 #import <AudioToolbox/AudioServices.h>
 #import <GameKit/GameKit.h>
 
+#define kEasyModeScoreKey @"easyScore"
+#define kMediumModeScoreKey @"mediumScore"
+#define kHardModeScoreKey @"hardScore"
+#define kExtremeModeScoreKey @"extremeScore"
+#define kBlitzModeScoreKey @"blitzScore"
+
 @class FormicViewController;
 
 @interface FormicGame : NSObject
@@ -23,6 +29,7 @@
 	int mLives;						// the amount of lives left
 	int mPoints;					// the amount of pieces set
 	int mConsecutive;				// number of consecutive matches
+    int mConsecutiveShapeOnly;
 	FGGameState mState;				// the state of the game (running, over, etc.)
 	BOOL mBlocked;					// if blocked for animations to finish
 	BOOL mGameBegin;
@@ -72,6 +79,8 @@
 
 @property (nonatomic, assign) FGGameState mState;
 @property (nonatomic, assign) FGGameLevel gameLevel;
+
+@property (nonatomic, assign, getter = isGameUnlocked) BOOL gameUnlocked;
 
 @property (nonatomic, assign) BOOL mBlocked;
 @property (nonatomic, assign) BOOL mGameBegin;
@@ -125,8 +134,6 @@
 - (void)unfreezeClock;
 - (void)addExtraSeconds;
 
-#ifdef DEMO_MODE
-#else
 // Leaderboard
 - (void)authenticateLocalUserAndSubmitScore;
 - (void)submitScore;
@@ -134,6 +141,7 @@
 // Achievements
 - (void)checkForGameOverAchievements;
 - (void)submitBackToBackAchievement;
-#endif
+
+- (void)newCenterPiece;
 
 @end

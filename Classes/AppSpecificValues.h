@@ -63,6 +63,7 @@ typedef enum {
 	FGPowerupRadiation,
 	FGPowerupUniformity,
 	FGPowerupExtraLife,
+    FGPowerupAutowin,
 	FGPowerupExtraTime,
 	FGPowerupFreeze,
 	FGPowerupNone
@@ -104,17 +105,17 @@ typedef enum {
 	FGStyledPopupStatePause	
 } FGStyledPopupState;
 
-typedef enum {
-	FGDemoStatusUnknown,
-	FGDemoStatusActive,
-	FGDemoStatusExpired
-} FGDemoStatus;
+//typedef enum {
+//	FGDemoStatusUnknown,
+//	FGDemoStatusActive,
+//	FGDemoStatusExpired
+//} FGDemoStatus;
 
 // Other definitions
 
 #define GAME_CIRCLES				6
 #define GAME_TIMERSTEPS				25
-#define GAME_POWERUPS				5
+#define GAME_POWERUPS				6
 #define GAME_POWERUP_SLOTS			3
 #define GAME_COLOR					0
 #define GAME_SHAPE					1
@@ -149,4 +150,4 @@ typedef enum {
 
 #define PAUSE_BEFORE_COUNTDOWN		0.5
 
-#define DEMO_SECONDS				601 // 601
+//#define DEMO_SECONDS				601 // 601

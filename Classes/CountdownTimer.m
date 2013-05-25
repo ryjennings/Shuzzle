@@ -20,7 +20,7 @@
 	mCountdownView = [[RRSGlowLabel alloc] initWithFrame:rect];
 	mCountdownView.text = @"3";
 	mCountdownView.font = [UIFont boldSystemFontOfSize:32.5];
-	mCountdownView.textAlignment = UITextAlignmentCenter;
+	mCountdownView.textAlignment = NSTextAlignmentCenter;
 	mCountdownView.textColor = [UIColor whiteColor];
 	mCountdownView.backgroundColor = [UIColor clearColor];
 	mCountdownView.glowColor = [UIColor colorWithRed:0.8 green:1.0 blue:1.0 alpha:1.0];

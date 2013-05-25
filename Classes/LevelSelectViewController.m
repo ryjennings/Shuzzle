@@ -6,6 +6,7 @@
 //  Copyright 2010 Xisen Science and Technology Co., Ltd. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "LevelSelectViewController.h"
 #import "FormicAppDelegate.h"
 #import "FormicGame.h"
@@ -26,6 +27,14 @@
 									delegate:self 
 						   cancelButtonTitle:@"New Game" 
 						   otherButtonTitles:@"Resume", nil] autorelease] show];
+    [timewarp.layer addAnimation:[AppDelegate rotationAnimation] forKey:@"spin"];
+    
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"isGameUnlocked"]) {
+        buttonMedium.enabled = NO;
+        buttonHard.enabled = NO;
+        buttonExtreme.enabled = NO;
+        buttonBlitz.enabled = NO;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

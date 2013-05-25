@@ -17,15 +17,16 @@
 #import "SplashViewController.h"
 #import "GameCenterManager.h"
 #import "AchievementAlertView.h"
-#import "DemoExpiredViewController.h"
+//#import "DemoExpiredViewController.h"
+#import "InAppPurchaseManager.h"
 
-#ifdef DEMO_MODE
-#import "DemoCountdown.h"
-#endif
+//#ifdef DEMO_MODE
+//#import "DemoCountdown.h"
+//#endif
 
 @implementation FormicAppDelegate
 
-@synthesize gameCenterManager, connectedToGameCenter;
+@synthesize gameCenterManager, connectedToGameCenter, shouldShowBigShuzzle;
 @synthesize window;
 @synthesize game;
 @synthesize volume, musicOff, effectsOff, vibrateOff, colorBlindnessOn, advancedPieceOn;
@@ -34,14 +35,16 @@
 @synthesize userMediaItemCollection, musicPlayer;
 @synthesize loadingView, loadingLabel;
 
-#ifdef DEMO_MODE
-@synthesize demoCountdown, loadedDemoSeconds, demoStatus;
-#endif
+//#ifdef DEMO_MODE
+//@synthesize demoCountdown, loadedDemoSeconds, demoStatus;
+//#endif
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {
 	srand(time(NULL));
 	[window makeKeyAndVisible];
+    
+    self.shouldShowBigShuzzle = NO;
 	
 	[self readDefaults];
 		
@@ -66,19 +69,12 @@
 	
 	savedGame = NO;
 	
-#ifdef DEMO_MODE
-	[self loadRemainingDemoSeconds];
-	if (self.demoStatus == FGDemoStatusExpired) {
-		menuMusicPlayer.volume = 0.0;
-		currentViewController = demoExpiredViewController;
-	} else {
-		currentViewController = splashViewController;
-	}
-#else
 	currentViewController = splashViewController;
-#endif
-	[window addSubview:currentViewController.view];
+
+    [window setRootViewController:currentViewController];
 	currentViewController.view.userInteractionEnabled = YES;
+    
+    [[InAppPurchaseManager sharedInstance] loadStore];
 }
 
 - (void)checkForInternetConnection
@@ -93,6 +89,7 @@
 {
 	NSLog(@"connectivity");
 	if ([GameCenterManager isGameCenterAvailable] && !self.connectedToGameCenter) {
+        NSLog(@"1111111");
 		self.gameCenterManager = [[[GameCenterManager alloc] init] autorelease];
 		[self.gameCenterManager setDelegate:self];
 		[self.gameCenterManager authenticateLocalUser];
@@ -113,17 +110,6 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-#ifdef DEMO_MODE
-	[self loadRemainingDemoSeconds];
-	if (self.demoStatus == FGDemoStatusExpired) {
-		menuMusicPlayer.volume = 0.0;
-		[demoExpiredViewController showAlert];
-		return;
-	}
-	if (currentViewController != splashViewController) {
-		[self showDemoCountdown];
-	}
-#endif
 	if (currentViewController == mainMenuViewController && !self.connectedToGameCenter) {
 		[self checkForInternetConnection];
 	}
@@ -136,10 +122,6 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-#ifdef DEMO_MODE
-	if (game == nil) return;
-	[self saveRemainingDemoSeconds];
-#endif	
 	if (([game mState] == FGGameStateRunning && [[formicViewController btnPause] isEnabled]) || [game mState] == FGGameStatePaused) {
 		[game stopTimer];
 	} else if (currentViewController == formicViewController && [game mState] != FGGameStateOver) {
@@ -153,9 +135,6 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-#ifdef DEMO_MODE
-	[self saveRemainingDemoSeconds];
-#endif
 	[game saveGame];
 	[self writeDefaults];
 }
@@ -175,7 +154,6 @@
 	[mainMenuViewController release];
 	[levelSelectViewController release];
 	[instructionsViewController release];
-	[demoExpiredViewController release];
 	[settingsViewController release];
 	[formicViewController release];
 	[splashViewController release];
@@ -218,13 +196,7 @@
 
 - (void)showMainMenuView {
 	[self playBackMusic:NO];
-#ifdef DEMO_MODE
-	if (self.demoStatus != FGDemoStatusExpired) {
-#endif
-		[self playMenuMusic:YES];
-#ifdef DEMO_MODE
-	}
-#endif			
+    [self playMenuMusic:YES];
 	[self showView:mainMenuViewController];
 }
 
@@ -256,30 +228,16 @@
 - (void)hideDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 {
 	if (currentViewController != nil) {
-#ifdef DEMO_MODE
-		[self hideDemoCountdown];
-#endif
 		[currentViewController.view removeFromSuperview];
-#ifdef DEMO_MODE
-//		if (showViewController == demoExpiredViewController) {
-//			[currentViewController release];
-//		}
-#endif
 	}
 	currentViewController = showViewController;
 	
-#ifdef DEMO_MODE
-	if (self.demoStatus != FGDemoStatusUnknown && currentViewController != demoExpiredViewController) {
-		[self performSelector:@selector(showDemoCountdown) withObject:nil afterDelay:0.1];
-	}
-#else
 	if (currentViewController == mainMenuViewController && !self.connectedToGameCenter) {
 		[self checkForInternetConnection];
 	}	
-#endif
 	
 	currentViewController.view.alpha = 0.0;
-	[window addSubview:showViewController.view];
+    [window setRootViewController:showViewController];
 	
 	currentViewController.view.userInteractionEnabled = NO;
 	
@@ -359,15 +317,9 @@
 
 - (void)playGameOverMusic
 {
-#ifdef DEMO_MODE
-	if (self.demoStatus != FGDemoStatusExpired) {
-#endif
 		if (!effectsOff) {
 			[self playSystemSound:@"/gameover.caf"];
 		}
-#ifdef DEMO_MODE
-	}
-#endif
 }
 
 - (void)playMoveSound
@@ -472,15 +424,15 @@
 - (void)showLoadingViewWithLabel:(NSString *)labelText
 {
 	if (loadingView == nil) {
-		loadingView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 480.0, 320.0)];
+		loadingView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, window.frame.size.height, window.frame.size.width)];
 		loadingView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
 		UIActivityIndicatorView *aiv = [[[UIActivityIndicatorView alloc] 
 										 initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge] autorelease];
 		aiv.center = CGPointMake(loadingView.bounds.size.width/2, loadingView.bounds.size.height/2);
 		[loadingView addSubview:aiv];
 		[aiv startAnimating];
-		loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 187.0, 460.0, 21.0)];
-		loadingLabel.textAlignment = UITextAlignmentCenter;
+		loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 187.0, window.frame.size.height - 20.0, 21.0)];
+		loadingLabel.textAlignment = NSTextAlignmentCenter;
 		loadingLabel.adjustsFontSizeToFitWidth = YES;
 		loadingLabel.font = [UIFont boldSystemFontOfSize:17.0];
 		loadingLabel.backgroundColor = [UIColor clearColor];
@@ -540,106 +492,6 @@
 	[defaults setInteger:controlScheme forKey:@"controlScheme"];
 }
 
-#pragma mark -
-#ifdef DEMO_MODE
-#pragma mark -
-
-#pragma mark Demo Mode
-
-- (void)saveRemainingDemoSeconds
-{
-	[self hideDemoCountdown];
-	int sec = demoCountdown.remainingSeconds;
-	NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-	[prefs setObject:[NSNumber numberWithInt:sec] forKey:@"demoseconds"];
-	NSLog(@"saved seconds %i", demoCountdown.remainingSeconds);
-}
-
-- (void)loadRemainingDemoSeconds
-{
-	NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-	self.demoStatus = [[NSNumber numberWithInt:[prefs integerForKey:@"demostatus"]] intValue];
-	loadedDemoSeconds = [[NSNumber numberWithInt:[prefs integerForKey:@"demoseconds"]] intValue];
-	NSLog(@"loaded seconds %i", loadedDemoSeconds);
-}
-
-- (void)showDemoCountdown
-{
-	if (demoCountdown == nil) {
-		[[NSBundle mainBundle] loadNibNamed:@"DemoCountdown" owner:self options:nil];
-		demoCountdown.remainingSeconds = loadedDemoSeconds;
-		demoCountdown.frame = CGRectMake(-25.0, 320.0, 145.0, 45.0);
-		demoCountdown.backgroundColor = [UIColor clearColor];		
-		[currentViewController.view addSubview:demoCountdown];
-		[UIView animateWithDuration:0.2
-							  delay:0.0
-							options:UIViewAnimationOptionAllowUserInteraction
-						 animations:^{
-							 demoCountdown.frame = CGRectMake(-25.0, 275.0, 145.0, 45.0);
-						 }
-						 completion:NULL];
-	} else {
-		demoCountdown.frame = CGRectMake(-25.0, 275.0, 145.0, 45.0);
-		[currentViewController.view addSubview:demoCountdown];
-	}
-	[demoCountdown startArrows];
-}
-
-- (void)hideDemoCountdown
-{
-	if (demoCountdown != nil) {
-		[demoCountdown stopArrows];
-		[demoCountdown removeFromSuperview];
-	}
-}
-
-- (void)killDemoCountdown
-{
-	[UIView animateWithDuration:0.2
-						  delay:0.0
-						options:UIViewAnimationOptionAllowUserInteraction
-					 animations:^{
-						 demoCountdown.frame = CGRectMake(-25.0, 320.0, 145.0, 45.0);
-					 }
-					 completion:^(BOOL finished){
-						 [demoCountdown removeFromSuperview];
-						 [demoCountdown release], demoCountdown = nil;
-					 }];	
-}
-
-- (void)displayDemoExpiredViewController
-{
-	self.demoStatus = FGDemoStatusExpired;
-	[self fadeOutAudioPlayer:backMusicPlayer];
-	[self fadeOutAudioPlayer:menuMusicPlayer];
-	[game release], game = nil;
-	[currentViewController release];
-	[self showView:demoExpiredViewController];
-}
-
-- (void)fadeOutAudioPlayer:(AVAudioPlayer *)player
-{
-	if (player.volume > 0) {
-		player.volume -= 0.05;
-		[self performSelector:@selector(fadeOutAudioPlayer:) withObject:player afterDelay:0.1];
-	} else {
-		[player stop];
-		[player release], player = nil;
-	}
-}
-
-
-#pragma mark -
-#pragma mark Empties
-
-- (void)leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController
-{
-}
-
-#pragma mark -
-#else
-#pragma mark -
-
 #pragma mark Leader Board
 
 - (void)displayLeaderBoard
@@ -648,14 +500,16 @@
 	
 	GKLocalPlayer *myPlayer = [GKLocalPlayer localPlayer];
 	if (![myPlayer isAuthenticated]) {
-		[myPlayer authenticateWithCompletionHandler:^(NSError *error) {			 
-			if (!error) {
+        [myPlayer setAuthenticateHandler:^(UIViewController *viewcontroller, NSError *error) {
+            if (!error) {
 				[self updateLoadingLabel:@"Loading Leader Board"];
 				GKLeaderboardViewController *leaderboardViewController = [[GKLeaderboardViewController alloc] init];
 				leaderboardViewController.leaderboardDelegate = self;
 				leaderboardViewController.timeScope = GKLeaderboardTimeScopeAllTime;				 
 				leaderboardViewController.category = nil;
-				[currentViewController presentModalViewController:leaderboardViewController animated:YES];
+//				[currentViewController presentModalViewController:leaderboardViewController animated:YES];
+                [currentViewController presentViewController:leaderboardViewController animated:YES completion:nil];
+
 				[self dismissLoadingView];
 			} else {
 				[self dismissLoadingView];
@@ -666,26 +520,22 @@
 		leaderboardViewController.leaderboardDelegate = self;
 		leaderboardViewController.timeScope = GKLeaderboardTimeScopeAllTime;				 
 		leaderboardViewController.category = nil;		
-		[currentViewController presentModalViewController:leaderboardViewController animated:YES];
+//		[currentViewController presentModalViewController:leaderboardViewController animated:YES];
+        [currentViewController presentViewController:leaderboardViewController animated:YES completion:nil];
 		[self dismissLoadingView];
 	}	
 }
 
 - (void)leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController
 {
-	[currentViewController dismissModalViewControllerAnimated:YES];
+//	[currentViewController dismissModalViewControllerAnimated:YES];
+    [currentViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)showMainMenuViewAndLeaderBoard
 {
 	[self playBackMusic:NO];
-#ifdef DEMO_MODE
-	if (self.demoStatus != FGDemoStatusExpired) {
-#endif
 		[self playMenuMusic:YES];
-#ifdef DEMO_MODE
-	}
-#endif
 	[self showView:mainMenuViewController];
 	[self performSelector:@selector(displayLeaderBoard) withObject:nil afterDelay:1.0];
 }
@@ -782,6 +632,13 @@
 	}
 }
 
-#endif
+- (CABasicAnimation *)rotationAnimation {
+    CABasicAnimation *rotation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+    rotation.fromValue = [NSNumber numberWithFloat:0.0];
+    rotation.toValue = [NSNumber numberWithFloat:2 * M_PI];
+    rotation.duration = 20.0;
+    rotation.repeatCount = HUGE_VALF;
+    return rotation;
+}
 
 @end

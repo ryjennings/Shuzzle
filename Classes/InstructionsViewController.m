@@ -14,16 +14,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	scrollView.contentSize = CGSizeMake(1920.0, 320.0);
+	scrollView.contentSize = CGSizeMake(self.view.frame.size.height * 4, self.view.frame.size.width);
 	
 	UIImageView *pg1 = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"instructions-pg1"]] autorelease];
 	UIImageView *pg2 = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"instructions-pg2"]] autorelease];
 	UIImageView *pg3 = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"instructions-pg3"]] autorelease];
 	UIImageView *pg4 = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"instructions-pg4"]] autorelease];
-	pg1.center = CGPointMake(240.0, 160.0);
-	pg2.center = CGPointMake(720.0, 160.0);
-	pg3.center = CGPointMake(1200.0, 160.0);
-	pg4.center = CGPointMake(1680.0, 160.0);
+	pg1.center = CGPointMake(self.view.frame.size.height / 2, 160.0);
+	pg2.center = CGPointMake(self.view.frame.size.height + (self.view.frame.size.height / 2), 160.0);
+	pg3.center = CGPointMake((self.view.frame.size.height * 2) + (self.view.frame.size.height / 2), 160.0);
+	pg4.center = CGPointMake((self.view.frame.size.height * 3) + (self.view.frame.size.height / 2), 160.0);
 	
 	[scrollView addSubview:pg1];
 	[scrollView addSubview:pg2];
@@ -34,18 +34,6 @@
 	pgControl.currentPage = 0;
 	pgControl.numberOfPages = 4;
 	[pgControl addTarget:self action:@selector(pageControlDidChange:) forControlEvents:UIControlEventValueChanged];
-}
-
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
-}
-
-- (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

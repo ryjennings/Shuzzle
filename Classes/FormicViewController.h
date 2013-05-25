@@ -20,9 +20,12 @@
 {
 	UIImageView		*mStartView;
 	UIImageView		*mCenterView;
+    int             mCenterViewType;
 	UIImageView		*mMovedView;
 	UIImageView		*mCircleView[GAME_CIRCLES];
-	
+    int             mCircleViewTypes[GAME_CIRCLES];
+	int             autoWinCount;
+    
 	//
 	// Powerups
 	//
@@ -36,6 +39,10 @@
 	IBOutlet UILabel *lowerLabel;
 
 	IBOutlet UIView *accessoryView;
+    
+    IBOutlet UIImageView *timewarp;
+    
+    IBOutlet UIImageView *modeImageView;
 	
 	int powerupInUseSlot;
 	BOOL pulsingPowerUpButton;

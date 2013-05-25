@@ -32,21 +32,21 @@
 	achievementLabel.backgroundColor = [UIColor clearColor];
 	achievementLabel.textColor = [UIColor whiteColor];
 	achievementLabel.font = [UIFont boldSystemFontOfSize:15];
-	achievementLabel.textAlignment = UITextAlignmentCenter;
+	achievementLabel.textAlignment = NSTextAlignmentCenter;
 	[self addSubview:achievementLabel];
 	
 	NSString *achievementTitle;
 	
-	if (identifier == kAchievementBackToBack) achievementTitle = kTitleBackToBack;
-	else if (identifier == kAchievementConsecutiveCombos) achievementTitle = kTitleConsecutiveCombos;
-	else if (identifier == kAchievementDoubleCombos) achievementTitle = kTitleDoubleCombos;
-	else if (identifier == kAchievementTiltExpert) achievementTitle = kTitleTiltExpert;
-	else if (identifier == kAchievementOneLife) achievementTitle = kTitleOneLife;
-	else if (identifier == kAchievementNoPowerups) achievementTitle = kTitleNoPowerups;
-	else if (identifier == kAchievementLowPts) achievementTitle = kTitleLowPts;
-	else if (identifier == kAchievementMedPts) achievementTitle = kTitleMedPts;
-	else if (identifier == kAchievementHighPts) achievementTitle = kTitleHighPts;
-	else if (identifier == kAchievementEliminator) achievementTitle = kTitleEliminator;
+	if ([identifier isEqualToString:kAchievementBackToBack]) achievementTitle = kTitleBackToBack;
+	else if ([identifier isEqualToString:kAchievementConsecutiveCombos]) achievementTitle = kTitleConsecutiveCombos;
+	else if ([identifier isEqualToString:kAchievementDoubleCombos]) achievementTitle = kTitleDoubleCombos;
+	else if ([identifier isEqualToString:kAchievementTiltExpert]) achievementTitle = kTitleTiltExpert;
+	else if ([identifier isEqualToString:kAchievementOneLife]) achievementTitle = kTitleOneLife;
+	else if ([identifier isEqualToString:kAchievementNoPowerups]) achievementTitle = kTitleNoPowerups;
+	else if ([identifier isEqualToString:kAchievementLowPts]) achievementTitle = kTitleLowPts;
+	else if ([identifier isEqualToString:kAchievementMedPts]) achievementTitle = kTitleMedPts;
+	else if ([identifier isEqualToString:kAchievementHighPts]) achievementTitle = kTitleHighPts;
+	else if ([identifier isEqualToString:kAchievementEliminator]) achievementTitle = kTitleEliminator;
 	
 	achievementImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", identifier]];
 	achievementLabel.text = [NSString stringWithFormat:@"Achievement Earned: %@", achievementTitle];

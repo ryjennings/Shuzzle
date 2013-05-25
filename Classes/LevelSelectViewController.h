@@ -16,6 +16,7 @@
 	IBOutlet UIButton *buttonExtreme;
 	IBOutlet UIButton *buttonBlitz;
 	IBOutlet UIButton *buttonBack;
+    IBOutlet UIImageView *timewarp;
 }
 
 - (IBAction)onButtonEasy;

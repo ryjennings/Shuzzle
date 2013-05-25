@@ -63,15 +63,19 @@
 - (void)authenticateLocalUser
 {
 	if ([GKLocalPlayer localPlayer].authenticated == NO) {
-		[[GKLocalPlayer localPlayer] authenticateWithCompletionHandler:^(NSError *error) 
-		 {
+        [[GKLocalPlayer localPlayer] setAuthenticateHandler:^(UIViewController *viewcontroller, NSError *error) {
+            if (!error) {
+                NSLog(@"callDelegateOnMainThread");
 			 [self callDelegateOnMainThread:@selector(processGameCenterAuth:) withArg:NULL error:error];
+            }
 		 }];
 	}
 }
 
 - (void)submitAchievement:(NSString *)identifier percentComplete:(double)percentComplete
 {
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"isGameUnlocked"]) {
+ 
 	NSLog(@"Submitting achievement %@ %f", identifier, percentComplete);
 	if (self.earnedAchievementCache == NULL) {
 		[GKAchievement loadAchievementsWithCompletionHandler: ^(NSArray *scores, NSError *error)
@@ -112,6 +116,7 @@
 			 }];
 		}
 	}
+    }
 }
 
 @end

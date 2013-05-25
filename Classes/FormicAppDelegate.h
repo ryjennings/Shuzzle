@@ -6,6 +6,7 @@
 //  Copyright 2010 NorthBound Media, Inc (TM). All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVAudioPlayer.h>
 #import <MediaPlayer/MediaPlayer.h>
@@ -19,11 +20,11 @@
 @class SettingsViewController;
 @class FormicViewController;
 @class SplashViewController;
-@class DemoExpiredViewController;
+//@class DemoExpiredViewController;
 
-#ifdef DEMO_MODE
-@class DemoCountdown;
-#endif
+//#ifdef DEMO_MODE
+//@class DemoCountdown;
+//#endif
 
 #define AppDelegate	(FormicAppDelegate *)[[UIApplication sharedApplication] delegate]
 
@@ -52,7 +53,7 @@
 	IBOutlet SettingsViewController *settingsViewController;
 	IBOutlet FormicViewController *formicViewController;
 	IBOutlet SplashViewController *splashViewController;
-	IBOutlet DemoExpiredViewController *demoExpiredViewController;
+//	IBOutlet DemoExpiredViewController *demoExpiredViewController;
 	
 	MPMusicPlayerController *musicPlayer;	
 	MPMediaItemCollection *userMediaItemCollection;
@@ -72,12 +73,13 @@
 	BOOL isAnnouncingAchievement;
 	
 	BOOL connectedToGameCenter;
+	BOOL shouldShowBigShuzzle;
 	
-#ifdef DEMO_MODE
-	DemoCountdown *demoCountdown;
-	int loadedDemoSeconds;
-	FGDemoStatus demoStatus;
-#endif
+//#ifdef DEMO_MODE
+//	DemoCountdown *demoCountdown;
+//	int loadedDemoSeconds;
+//	FGDemoStatus demoStatus;
+//#endif
 }
 
 @property (nonatomic, retain) GameCenterManager *gameCenterManager;
@@ -86,11 +88,11 @@
 @property (nonatomic, retain) IBOutlet UILabel *loadingLabel;
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 
-#ifdef DEMO_MODE
-@property (nonatomic, retain) IBOutlet DemoCountdown *demoCountdown;
-@property (nonatomic, assign) int loadedDemoSeconds;
-@property (nonatomic, assign) FGDemoStatus demoStatus;
-#endif
+//#ifdef DEMO_MODE
+//@property (nonatomic, retain) IBOutlet DemoCountdown *demoCountdown;
+//@property (nonatomic, assign) int loadedDemoSeconds;
+//@property (nonatomic, assign) FGDemoStatus demoStatus;
+//#endif
 
 @property (readonly) FormicGame *game;
 @property (nonatomic, assign) BOOL musicOff;
@@ -101,6 +103,7 @@
 @property (nonatomic, assign) BOOL savedGame;
 
 @property (nonatomic, assign) BOOL connectedToGameCenter;
+@property (nonatomic, assign) BOOL shouldShowBigShuzzle;
 
 @property (nonatomic, retain) MPMusicPlayerController *musicPlayer;
 @property (nonatomic, retain) MPMediaItemCollection	*userMediaItemCollection; 
@@ -143,16 +146,6 @@
 - (void)dismissLoadingView;
 - (void)removeLoadingView;
 
-#ifdef DEMO_MODE
-// Demo
-- (void)showDemoCountdown;
-- (void)hideDemoCountdown;
-- (void)killDemoCountdown;
-- (void)saveRemainingDemoSeconds;
-- (void)loadRemainingDemoSeconds;
-- (void)displayDemoExpiredViewController;
-- (void)fadeOutAudioPlayer:(AVAudioPlayer *)player;
-#else
 // Achievements
 - (NSDictionary *)checkEarnedAchievements;
 - (void)achievementSubmitted:(GKAchievement *)ach error:(NSError *)error;
@@ -161,8 +154,8 @@
 // Leaderboard
 - (void)displayLeaderBoard;
 - (void)showMainMenuViewAndLeaderBoard;
-#endif
 
 - (void)checkForInternetConnection;
+- (CABasicAnimation *)rotationAnimation;
 
 @end

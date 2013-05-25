@@ -11,6 +11,8 @@
 #import "FormicAppDelegate.h"
 #import "AchievementAlertView.h"
 
+#define kPowerupTheshold 20
+
 @interface FormicGame (Private)
 
 - (void)startTimer;
@@ -18,7 +20,6 @@
 - (void)timerAdvanced:(NSTimer *)aTimer;
 - (void)blitzTimerAdvanced:(NSTimer *)aTimer;
 - (void)zoomInCircle:(NSNumber *)number;
-- (void)newCenterPiece;
 
 @end
 
@@ -99,11 +100,9 @@
 			[timer invalidate];
 			timer = nil;
 			mState = FGGameStateOver;
+            [self saveScoreToUserDefaults];
 			[mController gameOver];
-#ifdef DEMO_MODE
-#else
 			[self checkForGameOverAchievements];
-#endif
 		} else {
 			if (blitzSeconds == 10) {
 				[mController activateLivesCritical];
@@ -118,18 +117,78 @@
 	}
 }
 
+- (void)saveScoreToUserDefaults {
+    switch (self.gameLevel) {
+        case FGGameLevelEasy:
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:kEasyModeScoreKey]) {
+                if (mPoints > [[[NSUserDefaults standardUserDefaults] objectForKey:kEasyModeScoreKey] integerValue]) {
+                    [[NSUserDefaults standardUserDefaults] setInteger:mPoints forKey:kEasyModeScoreKey];
+                }
+            } else {
+                [[NSUserDefaults standardUserDefaults] setInteger:mPoints forKey:kEasyModeScoreKey];
+            }
+            break;
+        case FGGameLevelMedium:
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:kMediumModeScoreKey]) {
+                if (mPoints > [[[NSUserDefaults standardUserDefaults] objectForKey:kMediumModeScoreKey] integerValue]) {
+                    [[NSUserDefaults standardUserDefaults] setInteger:mPoints forKey:kMediumModeScoreKey];
+                }
+            } else {
+                [[NSUserDefaults standardUserDefaults] setInteger:mPoints forKey:kMediumModeScoreKey];
+            }
+            break;
+        case FGGameLevelHard:
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:kHardModeScoreKey]) {
+                if (mPoints > [[[NSUserDefaults standardUserDefaults] objectForKey:kHardModeScoreKey] integerValue]) {
+                    [[NSUserDefaults standardUserDefaults] setInteger:mPoints forKey:kHardModeScoreKey];
+                }
+            } else {
+                [[NSUserDefaults standardUserDefaults] setInteger:mPoints forKey:kHardModeScoreKey];
+            }
+            break;
+        case FGGameLevelExtreme:
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:kExtremeModeScoreKey]) {
+                if (mPoints > [[[NSUserDefaults standardUserDefaults] objectForKey:kExtremeModeScoreKey] integerValue]) {
+                    [[NSUserDefaults standardUserDefaults] setInteger:mPoints forKey:kExtremeModeScoreKey];
+                }
+            } else {
+                [[NSUserDefaults standardUserDefaults] setInteger:mPoints forKey:kExtremeModeScoreKey];
+            }
+            break;
+        case FGGameLevelBlitz:
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:kBlitzModeScoreKey]) {
+                if (mPoints > [[[NSUserDefaults standardUserDefaults] objectForKey:kBlitzModeScoreKey] integerValue]) {
+                    [[NSUserDefaults standardUserDefaults] setInteger:mPoints forKey:kBlitzModeScoreKey];
+                }
+            } else {
+                [[NSUserDefaults standardUserDefaults] setInteger:mPoints forKey:kBlitzModeScoreKey];
+            }
+            break;
+        default:
+            break;
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 - (void)zoomInCircle:(NSNumber *)number
 {
 	int	circle = [number intValue];
 	[mController zoomInCircle:circle withColor:mCircle[circle][GAME_COLOR] andShape:mCircle[circle][GAME_SHAPE]];
 }
 
+@end
+
+@implementation FormicGame
+
+@synthesize mState, mBlocked, mGameBegin, powerupInUse, localPlayer, playingNthGame, powerupSlot, powerupInSlot, inBlitzMode;
+@synthesize gameLevel;
+
 - (void)newCenterPiece
 {
-	// fade existing one out
+        // fade existing one out
 	[mController zoomOutCenter];
 	
-	if (powerupInUse == FGPowerupUniformity) {
+	if (powerupInUse == FGPowerupUniformity || powerupInUse == FGPowerupAutowin) {
 		mCenter[GAME_COLOR] = BLUE_COLOR;
 		mCenter[GAME_SHAPE] = mCircle[rand()%GAME_CIRCLES][GAME_SHAPE];
 	} else {
@@ -145,20 +204,13 @@
 	}
 	
 	
-	// display it
+        // display it
 	[mController zoomInCenterwithColor:mCenter[GAME_COLOR] andShape:mCenter[GAME_SHAPE]];
 	
-	// reset the timer
+        // reset the timer
 	mTime = 0;
 	[mController updateTimer:mTime];
 }
-
-@end
-
-@implementation FormicGame
-
-@synthesize mState, mBlocked, mGameBegin, powerupInUse, localPlayer, playingNthGame, powerupSlot, powerupInSlot, inBlitzMode;
-@synthesize gameLevel;
 
 - (id)initWithViewController:(FormicViewController *)controller
 {
@@ -167,6 +219,8 @@
 	if (!self)
 		return nil;
 	
+    self.gameUnlocked = [[NSUserDefaults standardUserDefaults] objectForKey:@"isGameUnlocked"];
+
 	// general initializations
 	mController = [controller retain];
 	mLives = 5;
@@ -264,7 +318,7 @@
 				if (mLives == 1) mPointsWithOneLife += SCORE_COLOR_MATCH * ((powerupInUse == FGPowerupDoubler) ? 2 : 1);
 			}
 			
-			if (powerupInUse != FGPowerupUniformity) {
+			if (powerupInUse != FGPowerupUniformity && powerupInUse != FGPowerupAutowin) {
 
 				// Consecutive match (this number could be one, in which case this is the first match)
 				mConsecutive++;
@@ -275,8 +329,6 @@
 				
 				// Consecutive Doubler match
 				mConsecutiveDouble++;
-#ifdef DEMO_MODE
-#else
 				NSLog(@"%i == %i", mConsecutiveDouble, kRequirementDoubleCombos);
 				if (mConsecutiveDouble == kRequirementDoubleCombos && [AppDelegate connectedToGameCenter]) {
 					/* LOGIC FOR DOUBLE COMBOS ACHIEVEMENT */
@@ -287,10 +339,7 @@
 					}
 					/* LOGIC FOR DOUBLE COMBOS ACHIEVEMENT */
 				}
-#endif
 			}
-#ifdef DEMO_MODE
-#else
 			if (mConsecutive == kRequirementConsecutiveCombos && [AppDelegate connectedToGameCenter]) {
 				/* LOGIC FOR CONSECUTIVE COMBOS ACHIEVEMENT */
 				NSDictionary *earnedAchievements = [AppDelegate checkEarnedAchievements];
@@ -300,12 +349,13 @@
 				}
 				/* LOGIC FOR CONSECUTIVE COMBOS ACHIEVEMENT */
 			}
-#endif
 			if (mConsecutive > GAME_MATCHES) {
 				// activate powerup and reset consecutive count
 				[self activateRandomPowerupSlot];
+                mConsecutiveShapeOnly = 0;
 				mConsecutive = 0;
 			}
+            
 			[mController updateScore:mPoints];
 		} else {
 			if (mCircle[circle][GAME_COLOR] == GOLDEN_COLOR) {
@@ -322,8 +372,6 @@
 		}
 		
 		
-#ifdef DEMO_MODE
-#else
 		if ([AppDelegate connectedToGameCenter]) {
 			/* LOGIC FOR TILT EXPERT ACHIEVEMENT */
 			if (m_nLevel == 3 && mPoints > kRequirementTiltExpert-1 && [AppDelegate controlScheme] == FGControlSchemeTiltMode) {
@@ -375,7 +423,6 @@
 			}
 			/* LOGIC FOR HIGH PTS ACHIEVEMENT */
 		}
-#endif		
 		
 		mBlocked = YES;
 		// temporary block so that the user can not rapidly place two shapes -- which causes a visual glitch
@@ -385,7 +432,16 @@
 		[mController moveCenterToCircle:circle];
 		mCenter[GAME_COLOR] = mCenter[GAME_SHAPE] = 0;
 		[self newCenterPiece];
-		
+        
+        
+        mConsecutiveShapeOnly++;
+        if (mConsecutiveShapeOnly > kPowerupTheshold) {
+				// activate powerup and reset consecutive count
+            [self activateRandomPowerupSlot];
+            mConsecutiveShapeOnly = 0;
+        }
+
+        
 		// yes we can!
 		return YES;
 	}
@@ -417,7 +473,7 @@
 		mCircle[num][GAME_SHAPE] = mCenter[GAME_SHAPE];
 
 	// Color
-	if (powerupInUse == FGPowerupUniformity) {
+	if (powerupInUse == FGPowerupUniformity || powerupInUse == FGPowerupAutowin) {
 		mCircle[num][GAME_COLOR] = BLUE_COLOR;
 	} else {
 		int golden = arc4random()%GOLDEN_CIRCLE_PROBABILITY;
@@ -454,6 +510,7 @@
 		[prefs setObject:[NSNumber numberWithInt:powerupUse[FGPowerupDoubler]] forKey:@"doublerpowerupuse"];
 		[prefs setObject:[NSNumber numberWithInt:powerupUse[FGPowerupSlowdown]] forKey:@"slowdownpowerupuse"];
 		[prefs setObject:[NSNumber numberWithInt:powerupUse[FGPowerupUniformity]] forKey:@"uniformitypowerupuse"];
+		[prefs setObject:[NSNumber numberWithInt:powerupUse[FGPowerupAutowin]] forKey:@"autowinpowerupuse"];
 		[prefs setObject:[NSNumber numberWithInt:powerupUse[FGPowerupExtraLife]] forKey:@"extralifepowerupuse"];
 
 		[prefs setObject:[NSNumber numberWithInt:m_nLevel] forKey:@"level"];
@@ -516,6 +573,7 @@
 	powerupUse[FGPowerupDoubler] = [prefs integerForKey:@"doublerpowerupuse"];
 	powerupUse[FGPowerupSlowdown] = [prefs integerForKey:@"slowdownpowerupuse"];
 	powerupUse[FGPowerupUniformity] = [prefs integerForKey:@"uniformitypowerupuse"];
+	powerupUse[FGPowerupAutowin] = [prefs integerForKey:@"autowinpowerupuse"];
 	powerupUse[FGPowerupExtraLife] = [prefs integerForKey:@"extralifepowerupuse"];
 	
 	// Golden Shape
@@ -659,11 +717,9 @@
 			mState = FGGameStateOver;
 			[timer invalidate];
 			timer = nil;
+            [self saveScoreToUserDefaults];
 			[mController gameOver];
-#ifdef DEMO_MODE
-#else
 			[self checkForGameOverAchievements];
-#endif
 		}
 		else
 		{
@@ -841,7 +897,7 @@
 			newPowerup = arc4random() % GAME_POWERUPS;
 		}
 	}
-	
+    
 	[powerupInSlot replaceObjectAtIndex:slot withObject:[NSNumber numberWithInt:newPowerup]];
 	[mController loadPowerupSlot:slot];
 }
@@ -874,21 +930,13 @@
 	if (blitzSeconds > 10) [mController deactivateLivesCritical];
 }
 
-#pragma mark -
-#ifdef DEMO_MODE
-#pragma mark -
-
-#pragma mark -
-#else
-#pragma mark -
-
 #pragma mark Leaderboard
 
 - (void)authenticateLocalUserAndSubmitScore
 {
 	if (![[GKLocalPlayer localPlayer] isAuthenticated]) {
-		[[GKLocalPlayer localPlayer] authenticateWithCompletionHandler:^(NSError *error) {
-			if (!error) {
+        [[GKLocalPlayer localPlayer] setAuthenticateHandler:^(UIViewController *viewcontroller, NSError *error) {
+            if (!error) {
 				[AppDelegate updateLoadingLabel:@"Posting Score"];
 				[self submitScore];
 			} else {
@@ -968,6 +1016,7 @@
 			powerupUse[FGPowerupSlowdown] == FGPowerupUnused &&
 			powerupUse[FGPowerupExtraLife] == FGPowerupUnused &&
 			powerupUse[FGPowerupUniformity] == FGPowerupUnused &&
+			powerupUse[FGPowerupAutowin] == FGPowerupUnused &&
 			powerupUse[FGPowerupDoubler] == FGPowerupUnused
 			) {
 			NSDictionary *earnedAchievements = [AppDelegate checkEarnedAchievements];
@@ -979,7 +1028,5 @@
 		/* LOGIC FOR ELIMINATOR ACHIEVEMENT */
 	}
 }
-
-#endif
 
 @end
