@@ -153,6 +153,7 @@
 						<string key="NSFrame">{{497, 20}, {55, 53}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -249,6 +250,10 @@
 								<object class="NSCustomResource" key="IBUIHighlightedImage">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">highScores-button-sel@2x.png</string>
+								</object>
+								<object class="NSCustomResource" key="IBUIDisabledImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">highScores-disabled@2x.png</string>
 								</object>
 								<object class="NSCustomResource" key="IBUISelectedImage">
 									<string key="NSClassName">NSImage</string>
@@ -3073,7 +3078,7 @@ IQ</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<real value="1"/>
+					<real value="3"/>
 					<object class="NSArray">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<reference ref="829794525"/>
@@ -3449,6 +3454,7 @@ IQ</string>
 				<string>highScores-button-sel.png</string>
 				<string>highScores-button-sel@2x.png</string>
 				<string>highScores-button@2x.png</string>
+				<string>highScores-disabled@2x.png</string>
 				<string>main-1136@2x.png</string>
 				<string>mainMenu-bottomFrame@2x.png</string>
 				<string>mainMenu-frame@2x.png</string>
@@ -3472,6 +3478,7 @@ IQ</string>
 				<string>{110, 106}</string>
 				<string>{110, 106}</string>
 				<string>{16, 16}</string>
+				<string>{344, 282}</string>
 				<string>{344, 282}</string>
 				<string>{344, 282}</string>
 				<string>{1136, 640}</string>
