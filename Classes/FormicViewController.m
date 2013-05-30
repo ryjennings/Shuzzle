@@ -32,6 +32,8 @@
 	[super viewWillAppear:animated];
 	bgPowerup.alpha = 0.0;
 		
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+    
 	if (viewHasAppearedForTheFirstTime) {
 		[countdownTimer performSelector:@selector(resetTimer) withObject:nil afterDelay:PAUSE_BEFORE_COUNTDOWN];
 		countdownTimer.hidden = NO;
@@ -79,6 +81,11 @@
     autoWinCount = 0;
 }
 
+- (void)appDidBecomeActive:(NSNotification *)note {
+    [timewarp.layer removeAllAnimations];
+    [timewarp.layer addAnimation:[AppDelegate rotationAnimation] forKey:@"spin"];
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
 	[super viewWillDisappear:animated];
@@ -103,7 +110,7 @@
 
 	// create and add the timer view
 	mTimerView = [[FormicTimerView alloc] init];
-	mTimerView.center = CGPointMake (center.y+1.0, center.x+1.0);
+	mTimerView.center = CGPointMake (center.y+0.5, center.x+0.5);
 	[accessoryView addSubview:mTimerView];
 	
 	// add the lives and points views

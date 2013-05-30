@@ -63,7 +63,7 @@
 	menuMusicPlayer.volume = volume;
 	[menuMusicPlayer prepareToPlay];
 	
-	[menuMusicPlayer playAtTime:menuMusicPlayer.deviceCurrentTime+3.5];
+//	[menuMusicPlayer playAtTime:menuMusicPlayer.deviceCurrentTime+3.5];
 	 
 	game = [[FormicGame alloc] initWithViewController:formicViewController];
 	
@@ -424,14 +424,14 @@
 - (void)showLoadingViewWithLabel:(NSString *)labelText
 {
 	if (loadingView == nil) {
-		loadingView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, window.frame.size.height, window.frame.size.width)];
+		loadingView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, currentViewController.view.frame.size.height, currentViewController.view.frame.size.width)];
 		loadingView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
 		UIActivityIndicatorView *aiv = [[[UIActivityIndicatorView alloc] 
 										 initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge] autorelease];
-		aiv.center = CGPointMake(loadingView.bounds.size.width/2, loadingView.bounds.size.height/2);
+		aiv.center = CGPointMake(loadingView.frame.size.width/2, loadingView.frame.size.height/2);
 		[loadingView addSubview:aiv];
 		[aiv startAnimating];
-		loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 187.0, window.frame.size.height - 20.0, 21.0)];
+		loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 187.0, currentViewController.view.frame.size.height - 20.0, 21.0)];
 		loadingLabel.textAlignment = NSTextAlignmentCenter;
 		loadingLabel.adjustsFontSizeToFitWidth = YES;
 		loadingLabel.font = [UIFont boldSystemFontOfSize:17.0];
@@ -573,7 +573,7 @@
 	isAnnouncingAchievement = YES;
 	AchievementAlertView *achievementAlert = [[AchievementAlertView alloc] initWithAchievement:[achievementAlertQueue objectAtIndex:0]];
 	[achievementAlertQueue removeObjectAtIndex:0];
-	[currentViewController.view addSubview:achievementAlert];
+	[window addSubview:achievementAlert];
 	achievementAlert.alpha = 0.0;
 	[UIView animateWithDuration:0.25
 						  delay:0.0

@@ -20,6 +20,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"saved"])
 		
 		[[[[UIAlertView alloc] initWithTitle:@"Resume Game" 
@@ -35,6 +38,11 @@
         buttonExtreme.enabled = NO;
         buttonBlitz.enabled = NO;
     }
+}
+
+- (void)appDidBecomeActive:(NSNotification *)note {
+    [timewarp.layer removeAllAnimations];
+    [timewarp.layer addAnimation:[AppDelegate rotationAnimation] forKey:@"spin"];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -25,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    NSLog(@"main menu viewDidLoad");
 }
 
 - (void)showIntroAlert {
@@ -35,8 +35,15 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    NSLog(@"main menu viewWillAppear");
     [super viewWillAppear:animated];
+
+    activeIndex = -1;
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+
     [timewarp.layer addAnimation:[AppDelegate rotationAnimation] forKey:@"spin"];
+    
     if ([AppDelegate shouldShowBigShuzzle]) {
         [AppDelegate setShouldShowBigShuzzle:NO];
         shuzzleBig.alpha = 1.0;
@@ -73,13 +80,18 @@
     }
 }
 
+- (void)appDidBecomeActive:(NSNotification *)note {
+    [timewarp.layer removeAllAnimations];
+    [timewarp.layer addAnimation:[AppDelegate rotationAnimation] forKey:@"spin"];
+}
+
 - (void)setupBottomOfScreen {
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"isGameUnlocked"]) {
         NSLog(@"GAME IS UNLOCKED!!!");
         unlockGroup.alpha = 0.0;
         playNowGroup.alpha = 1.0;
         buttonHighscores.enabled = YES;
-        [self setupScoreboard];
+        [self performSelector:@selector(setupScoreboard) withObject:nil afterDelay:0.0];
     } else {
         NSLog(@"GAME IS LOCKED!");
         [self hideErrorLabel];
@@ -96,58 +108,83 @@
 }
 
 - (void)setupScoreboard {
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:kEasyModeScoreKey]) {
-        scores[0] = [[[NSUserDefaults standardUserDefaults] objectForKey:kEasyModeScoreKey] intValue];
-    }
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:kMediumModeScoreKey]) {
-        scores[1] = [[[NSUserDefaults standardUserDefaults] objectForKey:kMediumModeScoreKey] intValue];
-    }
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:kHardModeScoreKey]) {
-        scores[2] = [[[NSUserDefaults standardUserDefaults] objectForKey:kHardModeScoreKey] intValue];
-    }
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:kExtremeModeScoreKey]) {
-        scores[3] = [[[NSUserDefaults standardUserDefaults] objectForKey:kExtremeModeScoreKey] intValue];
-    }
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:kBlitzModeScoreKey]) {
-        scores[4] = [[[NSUserDefaults standardUserDefaults] objectForKey:kBlitzModeScoreKey] intValue];
-    }
+    scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * 6, scrollView.frame.size.height);
+    
+    scores[0] = ([[NSUserDefaults standardUserDefaults] objectForKey:kEasyModeScoreKey]) ? [[[NSUserDefaults standardUserDefaults] objectForKey:kEasyModeScoreKey] intValue] : 0;
+
+    scores[1] = ([[NSUserDefaults standardUserDefaults] objectForKey:kMediumModeScoreKey]) ? [[[NSUserDefaults standardUserDefaults] objectForKey:kMediumModeScoreKey] intValue] : 0;
+
+    scores[2] = ([[NSUserDefaults standardUserDefaults] objectForKey:kHardModeScoreKey]) ? [[[NSUserDefaults standardUserDefaults] objectForKey:kHardModeScoreKey] intValue] : 0;
+
+    scores[3] = ([[NSUserDefaults standardUserDefaults] objectForKey:kExtremeModeScoreKey]) ? [[[NSUserDefaults standardUserDefaults] objectForKey:kExtremeModeScoreKey] intValue] : 0;
+    
+    scores[4] = ([[NSUserDefaults standardUserDefaults] objectForKey:kBlitzModeScoreKey]) ? [[[NSUserDefaults standardUserDefaults] objectForKey:kBlitzModeScoreKey] intValue] : 0;
+    
+    NSNumberFormatter *formatter = [NSNumberFormatter new];
+    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    
+    NSMutableAttributedString *a1 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Easy Mode %@ points", [formatter stringFromNumber:[NSNumber numberWithInt:scores[0]]]]];
+    [a1 addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-BoldItalic" size:18.0] range:NSMakeRange(0, @"Easy Mode".length)];
+    [a1 addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-LightItalic" size:18.0] range:NSMakeRange(@"Easy Mode".length, a1.string.length - @"Easy Mode".length)];
+
+    scoreLabel1.attributedText = a1;
+    scoreLabel1.textAlignment = NSTextAlignmentCenter;
+    scoreLabel6.attributedText = a1;
+    scoreLabel6.textAlignment = NSTextAlignmentCenter;
+    
+    NSMutableAttributedString *a2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Medium Mode %@ points", [formatter stringFromNumber:[NSNumber numberWithInt:scores[1]]]]];
+    [a2 addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-BoldItalic" size:18.0] range:NSMakeRange(0, @"Medium Mode".length)];
+    [a2 addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-LightItalic" size:18.0] range:NSMakeRange(@"Medium Mode".length, a2.string.length - @"Medium Mode".length)];
+    scoreLabel2.attributedText = a2;
+    scoreLabel2.textAlignment = NSTextAlignmentCenter;
+    
+    NSMutableAttributedString *a3 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Hard Mode %@ points", [formatter stringFromNumber:[NSNumber numberWithInt:scores[2]]]]];
+    [a3 addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-BoldItalic" size:18.0] range:NSMakeRange(0, @"Hard Mode".length)];
+    [a3 addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-LightItalic" size:18.0] range:NSMakeRange(@"Hard Mode".length, a3.string.length - @"Hard Mode".length)];
+    scoreLabel3.attributedText = a3;
+    scoreLabel3.textAlignment = NSTextAlignmentCenter;
+    
+    NSMutableAttributedString *a4 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Extreme Mode %@ points", [formatter stringFromNumber:[NSNumber numberWithInt:scores[3]]]]];
+    [a4 addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-BoldItalic" size:18.0] range:NSMakeRange(0, @"Extreme Mode".length)];
+    [a4 addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-LightItalic" size:18.0] range:NSMakeRange(@"Extreme Mode".length, a4.string.length - @"Extreme Mode".length)];
+    scoreLabel4.attributedText = a4;
+    scoreLabel4.textAlignment = NSTextAlignmentCenter;
+    
+    NSMutableAttributedString *a5 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Blitz Mode %@ points", [formatter stringFromNumber:[NSNumber numberWithInt:scores[4]]]]];
+    [a5 addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-BoldItalic" size:18.0] range:NSMakeRange(0, @"Blitz Mode".length)];
+    [a5 addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-LightItalic" size:18.0] range:NSMakeRange(@"Blitz Mode".length, a5.string.length - @"Blitz Mode".length)];
+    scoreLabel5.attributedText = a5;
+    scoreLabel5.textAlignment = NSTextAlignmentCenter;
+    
     [self updatePlayNowLabel];
 }
 
 - (void)updatePlayNowLabel {
-    NSString *mode;
-    NSString *score;
-    NSNumberFormatter *formatter = [NSNumberFormatter new];
-    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    switch (activeIndex) {
-        case 0:
-            mode = @"Easy Mode";
-            score = [formatter stringFromNumber:[NSNumber numberWithInt:scores[0]]];
-            break;
-        case 1:
-            mode = @"Medium Mode";
-            score = [formatter stringFromNumber:[NSNumber numberWithInt:scores[1]]];
-            break;
-        case 2:
-            mode = @"Hard Mode";
-            score = [formatter stringFromNumber:[NSNumber numberWithInt:scores[2]]];
-            break;
-        case 3:
-            mode = @"Extreme Mode";
-            score = [formatter stringFromNumber:[NSNumber numberWithInt:scores[3]]];
-            break;
-        case 4:
-            mode = @"Blitz Mode";
-            score = [formatter stringFromNumber:[NSNumber numberWithInt:scores[4]]];
-            break;
-        default:
-            break;
+    activeIndex++;
+    
+    [scrollView scrollRectToVisible:CGRectMake(scrollView.frame.size.width * activeIndex, 0.0, scrollView.frame.size.width, scrollView.frame.size.height) animated:YES];
+    
+    [self performSelector:@selector(updatePlayNowLabel) withObject:nil afterDelay:7.0];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)aScrollView {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)aScrollView {
+    if (aScrollView.contentOffset.x == 1860) {
+        [aScrollView scrollRectToVisible:CGRectMake(0.0, 0.0, aScrollView.frame.size.width, aScrollView.frame.size.height) animated:NO];
     }
-    NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %@ points", mode, score]];
-    [attributed addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-BoldItalic" size:18.0] range:NSMakeRange(0, mode.length)];
-    [attributed addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-LightItalic" size:18.0] range:NSMakeRange(mode.length, attributed.string.length - mode.length)];
-    playNowLabel.attributedText = attributed;
-    playNowLabel.textAlignment = NSTextAlignmentCenter;
+    [self performSelector:@selector(updatePlayNowLabel) withObject:nil afterDelay:7.0];
+    activeIndex = (int)(aScrollView.contentOffset.x / aScrollView.frame.size.width);
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)aScrollView {
+    if (aScrollView.contentOffset.x == 1860) {
+        [aScrollView scrollRectToVisible:CGRectMake(0.0, 0.0, aScrollView.frame.size.width, aScrollView.frame.size.height) animated:NO];
+        activeIndex = (int)(aScrollView.contentOffset.x / aScrollView.frame.size.width);
+    }
+    [self performSelector:@selector(updatePlayNowLabel) withObject:nil afterDelay:7.0];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -177,7 +214,7 @@
                          playNowGroup.alpha = 1.0;
                          buttonHighscores.enabled = YES;
                      }];
-    [self setupScoreboard];
+    [self performSelector:@selector(setupScoreboard) withObject:nil afterDelay:0.0];
     self.view.userInteractionEnabled = YES;
 }
 
@@ -217,6 +254,7 @@
 	[buttonSettings release];
 
     [timewarp release];
+    [scrollView release];
     
     [mainButtons release];
     
@@ -226,8 +264,16 @@
     [unlockErrorLabel release];
     
     [playNowGroup release];
-    [playNowButton release];
-    [playNowLabel release];
+    [scoreButton1 release];
+    [scoreButton2 release];
+    [scoreButton3 release];
+    [scoreButton4 release];
+    [scoreButton5 release];
+    [scoreLabel1 release];
+    [scoreLabel2 release];
+    [scoreLabel3 release];
+    [scoreLabel4 release];
+    [scoreLabel5 release];
     
     [instructionsWell release];
     [settingsWell release];

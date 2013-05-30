@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainMenuViewController : UIViewController {
+@interface MainMenuViewController : UIViewController <UIScrollViewDelegate> {
 	IBOutlet UIButton *buttonPlay;
 	IBOutlet UIButton *buttonHighscores;
 	IBOutlet UIButton *buttonInstructions;
@@ -23,13 +23,25 @@
     IBOutlet UILabel *unlockErrorLabel;
     
     IBOutlet UIView *playNowGroup;
-    IBOutlet UIButton *playNowButton;
-    IBOutlet UILabel *playNowLabel;
+    IBOutlet UIButton *scoreButton1;
+    IBOutlet UILabel *scoreLabel1;
+    IBOutlet UIButton *scoreButton2;
+    IBOutlet UILabel *scoreLabel2;
+    IBOutlet UIButton *scoreButton3;
+    IBOutlet UILabel *scoreLabel3;
+    IBOutlet UIButton *scoreButton4;
+    IBOutlet UILabel *scoreLabel4;
+    IBOutlet UIButton *scoreButton5;
+    IBOutlet UILabel *scoreLabel5;
+    IBOutlet UIButton *scoreButton6;
+    IBOutlet UILabel *scoreLabel6;
     
     IBOutlet UIImageView *instructionsWell;
     IBOutlet UIImageView *settingsWell;
     IBOutlet UIImageView *shuzzleSmall;
     IBOutlet UIImageView *shuzzleBig;
+    
+    IBOutlet UIScrollView *scrollView;
     
     int scores[5];
     int activeIndex;

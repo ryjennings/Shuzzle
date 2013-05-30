@@ -11,8 +11,9 @@
 @implementation AchievementAlertView
 
 - (id)initWithAchievement:(NSString *)anIdentifier
-{    
-    self = [super initWithFrame:CGRectMake(13.0, 266.0, 454.0, 54.0)];
+{
+    UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
+    self = [super initWithFrame:CGRectMake((frontWindow.frame.size.height / 2) - 227, 266.0, 454.0, 54.0)];
     if (self) {
         identifier = anIdentifier;
 		super.backgroundColor = [UIColor clearColor];
