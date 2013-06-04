@@ -77,6 +77,9 @@
                              }
 
                          }];
+    } else {
+        [scrollView scrollRectToVisible:CGRectMake(0.0, 0.0, scrollView.frame.size.width, scrollView.frame.size.height) animated:NO];
+        [self performSelector:@selector(updatePlayNowLabel) withObject:nil afterDelay:5.0];
     }
 }
 
@@ -90,14 +93,14 @@
         NSLog(@"GAME IS UNLOCKED!!!");
         unlockGroup.alpha = 0.0;
         playNowGroup.alpha = 1.0;
-        buttonHighscores.enabled = YES;
+//        buttonHighscores.enabled = YES;
         [self performSelector:@selector(setupScoreboard) withObject:nil afterDelay:0.0];
     } else {
         NSLog(@"GAME IS LOCKED!");
         [self hideErrorLabel];
         unlockGroup.alpha = 1.0;
         playNowGroup.alpha = 0.0;
-        buttonHighscores.enabled = NO;
+//        buttonHighscores.enabled = NO;
         [[InAppPurchaseManager sharedInstance] canUnlock];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(canMakePurchaseAndProductExists:) name:kInAppPurchaseManagerCanMakePurchaseAndProductExistsNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(canNotMakePurchase:) name:kInAppPurchaseManagerCanNotMakePurchaseNotification object:nil];
@@ -108,6 +111,93 @@
 }
 
 - (void)setupScoreboard {
+    
+    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(14.0, 26.0, 372.0, 37.0)];
+    scrollView.delegate = self;
+    scrollView.pagingEnabled = YES;
+    scrollView.alwaysBounceHorizontal = YES;
+    scrollView.alwaysBounceVertical = NO;
+    scrollView.showsHorizontalScrollIndicator = NO;
+    scrollView.showsVerticalScrollIndicator = NO;
+    
+    scoreButton1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    scoreButton1.frame = CGRectMake(246.0, 0.0, 111.0, 37.0);
+    [scoreButton1 setBackgroundImage:[UIImage imageNamed:@"playNow-button.png"] forState:UIControlStateNormal];
+    [scoreButton1 setBackgroundImage:[UIImage imageNamed:@"playNow-button-sel.png"] forState:UIControlStateHighlighted];
+    [scoreButton1 addTarget:self action:@selector(didTapPlayNowButton:) forControlEvents:UIControlEventTouchUpInside];
+    [scrollView addSubview:scoreButton1];
+    
+    scoreLabel1 = [[UILabel alloc] initWithFrame:CGRectMake(13.0, -1.0, 232.0, 42.0)];
+    scoreLabel1.backgroundColor = [UIColor clearColor];
+    scoreLabel1.shadowOffset = CGSizeMake(0.0, -1.0);
+    scoreLabel1.shadowColor = [UIColor whiteColor];
+    [scrollView addSubview:scoreLabel1];
+    
+    scoreButton2 = [UIButton buttonWithType:UIButtonTypeCustom];
+    scoreButton2.frame = CGRectMake(618.0, 0.0, 111.0, 37.0);
+    [scoreButton2 setBackgroundImage:[UIImage imageNamed:@"playNow-button.png"] forState:UIControlStateNormal];
+    [scoreButton2 setBackgroundImage:[UIImage imageNamed:@"playNow-button-sel.png"] forState:UIControlStateHighlighted];
+    [scoreButton2 addTarget:self action:@selector(didTapPlayNowButton:) forControlEvents:UIControlEventTouchUpInside];
+    [scrollView addSubview:scoreButton2];
+    
+    scoreLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(385.0, -1.0, 232.0, 42.0)];
+    scoreLabel2.backgroundColor = [UIColor clearColor];
+    scoreLabel2.shadowOffset = CGSizeMake(0.0, -1.0);
+    scoreLabel2.shadowColor = [UIColor whiteColor];
+    [scrollView addSubview:scoreLabel2];
+    
+    scoreButton3 = [UIButton buttonWithType:UIButtonTypeCustom];
+    scoreButton3.frame = CGRectMake(990.0, 0.0, 111.0, 37.0);
+    [scoreButton3 setBackgroundImage:[UIImage imageNamed:@"playNow-button.png"] forState:UIControlStateNormal];
+    [scoreButton3 setBackgroundImage:[UIImage imageNamed:@"playNow-button-sel.png"] forState:UIControlStateHighlighted];
+    [scoreButton3 addTarget:self action:@selector(didTapPlayNowButton:) forControlEvents:UIControlEventTouchUpInside];
+    [scrollView addSubview:scoreButton3];
+    
+    scoreLabel3 = [[UILabel alloc] initWithFrame:CGRectMake(757.0, -1.0, 232.0, 42.0)];
+    scoreLabel3.backgroundColor = [UIColor clearColor];
+    scoreLabel3.shadowOffset = CGSizeMake(0.0, -1.0);
+    scoreLabel3.shadowColor = [UIColor whiteColor];
+    [scrollView addSubview:scoreLabel3];
+    
+    scoreButton4 = [UIButton buttonWithType:UIButtonTypeCustom];
+    scoreButton4.frame = CGRectMake(1362.0, 0.0, 111.0, 37.0);
+    [scoreButton4 setBackgroundImage:[UIImage imageNamed:@"playNow-button.png"] forState:UIControlStateNormal];
+    [scoreButton4 setBackgroundImage:[UIImage imageNamed:@"playNow-button-sel.png"] forState:UIControlStateHighlighted];
+    [scoreButton4 addTarget:self action:@selector(didTapPlayNowButton:) forControlEvents:UIControlEventTouchUpInside];
+    [scrollView addSubview:scoreButton4];
+    
+    scoreLabel4 = [[UILabel alloc] initWithFrame:CGRectMake(1129.0, -1.0, 232.0, 42.0)];
+    scoreLabel4.backgroundColor = [UIColor clearColor];
+    scoreLabel4.shadowOffset = CGSizeMake(0.0, -1.0);
+    scoreLabel4.shadowColor = [UIColor whiteColor];
+    [scrollView addSubview:scoreLabel4];
+    
+    scoreButton5 = [UIButton buttonWithType:UIButtonTypeCustom];
+    scoreButton5.frame = CGRectMake(1734.0, 0.0, 111.0, 37.0);
+    [scoreButton5 setBackgroundImage:[UIImage imageNamed:@"playNow-button.png"] forState:UIControlStateNormal];
+    [scoreButton5 setBackgroundImage:[UIImage imageNamed:@"playNow-button-sel.png"] forState:UIControlStateHighlighted];
+    [scoreButton5 addTarget:self action:@selector(didTapPlayNowButton:) forControlEvents:UIControlEventTouchUpInside];
+    [scrollView addSubview:scoreButton5];
+    
+    scoreLabel5 = [[UILabel alloc] initWithFrame:CGRectMake(1501.0, -1.0, 232.0, 42.0)];
+    scoreLabel5.backgroundColor = [UIColor clearColor];
+    scoreLabel5.shadowOffset = CGSizeMake(0.0, -1.0);
+    scoreLabel5.shadowColor = [UIColor whiteColor];
+    [scrollView addSubview:scoreLabel5];
+    
+    scoreButton6 = [UIButton buttonWithType:UIButtonTypeCustom];
+    scoreButton6.frame = CGRectMake(2106.0, 0.0, 111.0, 37.0);
+    [scoreButton6 setBackgroundImage:[UIImage imageNamed:@"playNow-button.png"] forState:UIControlStateNormal];
+    [scoreButton6 setBackgroundImage:[UIImage imageNamed:@"playNow-button-sel.png"] forState:UIControlStateHighlighted];
+    [scoreButton6 addTarget:self action:@selector(didTapPlayNowButton:) forControlEvents:UIControlEventTouchUpInside];
+    [scrollView addSubview:scoreButton6];
+    
+    scoreLabel6 = [[UILabel alloc] initWithFrame:CGRectMake(1873.0, -1.0, 232.0, 42.0)];
+    scoreLabel6.backgroundColor = [UIColor clearColor];
+    scoreLabel6.shadowOffset = CGSizeMake(0.0, -1.0);
+    scoreLabel6.shadowColor = [UIColor whiteColor];
+    [scrollView addSubview:scoreLabel6];
+    
     scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * 6, scrollView.frame.size.height);
     
     scores[0] = ([[NSUserDefaults standardUserDefaults] objectForKey:kEasyModeScoreKey]) ? [[[NSUserDefaults standardUserDefaults] objectForKey:kEasyModeScoreKey] intValue] : 0;
@@ -156,6 +246,8 @@
     scoreLabel5.attributedText = a5;
     scoreLabel5.textAlignment = NSTextAlignmentCenter;
     
+    [playNowGroup addSubview:scrollView];
+    
     [self updatePlayNowLabel];
 }
 
@@ -164,7 +256,7 @@
     
     [scrollView scrollRectToVisible:CGRectMake(scrollView.frame.size.width * activeIndex, 0.0, scrollView.frame.size.width, scrollView.frame.size.height) animated:YES];
     
-    [self performSelector:@selector(updatePlayNowLabel) withObject:nil afterDelay:7.0];
+    [self performSelector:@selector(updatePlayNowLabel) withObject:nil afterDelay:5.0];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)aScrollView {
@@ -175,7 +267,7 @@
     if (aScrollView.contentOffset.x == 1860) {
         [aScrollView scrollRectToVisible:CGRectMake(0.0, 0.0, aScrollView.frame.size.width, aScrollView.frame.size.height) animated:NO];
     }
-    [self performSelector:@selector(updatePlayNowLabel) withObject:nil afterDelay:7.0];
+    [self performSelector:@selector(updatePlayNowLabel) withObject:nil afterDelay:5.0];
     activeIndex = (int)(aScrollView.contentOffset.x / aScrollView.frame.size.width);
 }
 
@@ -184,7 +276,7 @@
         [aScrollView scrollRectToVisible:CGRectMake(0.0, 0.0, aScrollView.frame.size.width, aScrollView.frame.size.height) animated:NO];
         activeIndex = (int)(aScrollView.contentOffset.x / aScrollView.frame.size.width);
     }
-    [self performSelector:@selector(updatePlayNowLabel) withObject:nil afterDelay:7.0];
+    [self performSelector:@selector(updatePlayNowLabel) withObject:nil afterDelay:5.0];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -212,7 +304,7 @@
                      animations:^{
                          unlockGroup.alpha = 0.0;
                          playNowGroup.alpha = 1.0;
-                         buttonHighscores.enabled = YES;
+//                         buttonHighscores.enabled = YES;
                      }];
     [self performSelector:@selector(setupScoreboard) withObject:nil afterDelay:0.0];
     self.view.userInteractionEnabled = YES;
@@ -322,10 +414,14 @@
 		}
 }
 
-- (IBAction)onButtonHighscores
-{
-	[AppDelegate displayLeaderBoard];
-	[AppDelegate showLoadingViewWithLabel:@"Accessing Game Center"];
+- (IBAction)onButtonHighscores {
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"isGameUnlocked"]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Locked" message:@"This game must be unlocked to access this feature." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    } else {
+        [AppDelegate displayLeaderBoard];
+        [AppDelegate showLoadingViewWithLabel:@"Accessing Game Center"];
+    }
 }
 
 - (IBAction)onButtonInstructions {
