@@ -23,25 +23,27 @@
     IBOutlet UILabel *unlockErrorLabel;
     
     IBOutlet UIView *playNowGroup;
-    IBOutlet UIButton *scoreButton1;
-    IBOutlet UILabel *scoreLabel1;
-    IBOutlet UIButton *scoreButton2;
-    IBOutlet UILabel *scoreLabel2;
-    IBOutlet UIButton *scoreButton3;
-    IBOutlet UILabel *scoreLabel3;
-    IBOutlet UIButton *scoreButton4;
-    IBOutlet UILabel *scoreLabel4;
-    IBOutlet UIButton *scoreButton5;
-    IBOutlet UILabel *scoreLabel5;
-    IBOutlet UIButton *scoreButton6;
-    IBOutlet UILabel *scoreLabel6;
+    
+    
+    UIScrollView *scrollView;
+    UIButton *scoreButton1;
+    UILabel *scoreLabel1;
+    UIButton *scoreButton2;
+    UILabel *scoreLabel2;
+    UIButton *scoreButton3;
+    UILabel *scoreLabel3;
+    UIButton *scoreButton4;
+    UILabel *scoreLabel4;
+    UIButton *scoreButton5;
+    UILabel *scoreLabel5;
+    UIButton *scoreButton6;
+    UILabel *scoreLabel6;
     
     IBOutlet UIImageView *instructionsWell;
     IBOutlet UIImageView *settingsWell;
     IBOutlet UIImageView *shuzzleSmall;
     IBOutlet UIImageView *shuzzleBig;
     
-    IBOutlet UIScrollView *scrollView;
     
     int scores[5];
     int activeIndex;

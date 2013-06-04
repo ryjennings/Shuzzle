@@ -46,6 +46,7 @@
 						<int key="NSvFlags">256</int>
 						<string key="NSFrameSize">{568, 320}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1039544978"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -62,6 +63,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{-368, -492}, {1304, 1304}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="356752259"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<float key="IBUIAlpha">0.20000000298023224</float>
@@ -77,6 +79,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{-5, 0}, {98, 98}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="830596427"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -90,6 +93,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{16, 20}, {55, 53}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="434642902"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -137,6 +141,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{20, 20}, {496, 179}}</string>
 								<reference key="NSSuperview" ref="434642902"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="508695943"/>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -150,12 +155,14 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{216, 40}, {85, 135}}</string>
 								<reference key="NSSuperview" ref="434642902"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1065556893"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
+								<bool key="IBUIAdjustsImageWhenDisabled">NO</bool>
 								<reference key="IBUIHighlightedTitleColor" ref="845874682"/>
 								<object class="NSColor" key="IBUINormalTitleColor">
 									<int key="NSColorSpace">1</int>
@@ -165,10 +172,6 @@
 								<object class="NSCustomResource" key="IBUIHighlightedBackgroundImage">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">hard-btn-sel.png</string>
-								</object>
-								<object class="NSCustomResource" key="IBUIDisabledBackgroundImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">hard-disabled@2x.png</string>
 								</object>
 								<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 									<string key="NSClassName">NSImage</string>
@@ -182,12 +185,14 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{303, 40}, {85, 135}}</string>
 								<reference key="NSSuperview" ref="434642902"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="159226871"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
+								<bool key="IBUIAdjustsImageWhenDisabled">NO</bool>
 								<reference key="IBUIHighlightedTitleColor" ref="845874682"/>
 								<object class="NSColor" key="IBUINormalTitleColor">
 									<int key="NSColorSpace">1</int>
@@ -197,10 +202,6 @@
 								<object class="NSCustomResource" key="IBUIHighlightedBackgroundImage">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">extreme-btn-sel.png</string>
-								</object>
-								<object class="NSCustomResource" key="IBUIDisabledBackgroundImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">extreme-disabled@2x.png</string>
 								</object>
 								<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 									<string key="NSClassName">NSImage</string>
@@ -214,12 +215,14 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{129, 40}, {85, 135}}</string>
 								<reference key="NSSuperview" ref="434642902"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="426983315"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
+								<bool key="IBUIAdjustsImageWhenDisabled">NO</bool>
 								<reference key="IBUIHighlightedTitleColor" ref="845874682"/>
 								<object class="NSColor" key="IBUINormalTitleColor">
 									<int key="NSColorSpace">1</int>
@@ -229,10 +232,6 @@
 								<object class="NSCustomResource" key="IBUIHighlightedBackgroundImage">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">medium-btn-sel.png</string>
-								</object>
-								<object class="NSCustomResource" key="IBUIDisabledBackgroundImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">medium-disabled@2x.png</string>
 								</object>
 								<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 									<string key="NSClassName">NSImage</string>
@@ -246,6 +245,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{42, 40}, {85, 135}}</string>
 								<reference key="NSSuperview" ref="434642902"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1051729692"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -274,12 +274,14 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{409, 40}, {85, 135}}</string>
 								<reference key="NSSuperview" ref="434642902"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1063636687"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
+								<bool key="IBUIAdjustsImageWhenDisabled">NO</bool>
 								<reference key="IBUIHighlightedTitleColor" ref="845874682"/>
 								<object class="NSColor" key="IBUINormalTitleColor">
 									<int key="NSColorSpace">1</int>
@@ -289,10 +291,6 @@
 								<object class="NSCustomResource" key="IBUIHighlightedBackgroundImage">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">blitz-btn-sel.png</string>
-								</object>
-								<object class="NSCustomResource" key="IBUIDisabledBackgroundImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">blitz-disabled@2x.png</string>
 								</object>
 								<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 									<string key="NSClassName">NSImage</string>
@@ -304,6 +302,7 @@
 						</object>
 						<string key="NSFrame">{{16, 63}, {536, 219}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="660390663"/>
 						<string key="NSReuseIdentifierKey">_NS:10</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -317,6 +316,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{194, 15}, {180, 64}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -329,6 +329,7 @@
 				</object>
 				<string key="NSFrameSize">{568, 320}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="921161026"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -1851,7 +1852,154 @@
 			<nil key="sourceID"/>
 			<int key="maxID">122</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+				<object class="IBPartialClassDescription">
+					<string key="className">LevelSelectViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>onButtonBack</string>
+							<string>onButtonBlitz</string>
+							<string>onButtonEasy</string>
+							<string>onButtonExtreme</string>
+							<string>onButtonHard</string>
+							<string>onButtonMedium</string>
+						</object>
+						<object class="NSArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>onButtonBack</string>
+							<string>onButtonBlitz</string>
+							<string>onButtonEasy</string>
+							<string>onButtonExtreme</string>
+							<string>onButtonHard</string>
+							<string>onButtonMedium</string>
+						</object>
+						<object class="NSArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBActionInfo">
+								<string key="name">onButtonBack</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">onButtonBlitz</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">onButtonEasy</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">onButtonExtreme</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">onButtonHard</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">onButtonMedium</string>
+								<string key="candidateClassName">id</string>
+							</object>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="outlets">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>buttonBack</string>
+							<string>buttonBlitz</string>
+							<string>buttonEasy</string>
+							<string>buttonExtreme</string>
+							<string>buttonHard</string>
+							<string>buttonMedium</string>
+							<string>timewarp</string>
+						</object>
+						<object class="NSArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIButton</string>
+							<string>UIButton</string>
+							<string>UIButton</string>
+							<string>UIButton</string>
+							<string>UIButton</string>
+							<string>UIButton</string>
+							<string>UIImageView</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>buttonBack</string>
+							<string>buttonBlitz</string>
+							<string>buttonEasy</string>
+							<string>buttonExtreme</string>
+							<string>buttonHard</string>
+							<string>buttonMedium</string>
+							<string>timewarp</string>
+						</object>
+						<object class="NSArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">buttonBack</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">buttonBlitz</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">buttonEasy</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">buttonExtreme</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">buttonHard</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">buttonMedium</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">timewarp</string>
+								<string key="candidateClassName">UIImageView</string>
+							</object>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/LevelSelectViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSLayoutConstraint</string>
+					<string key="superclassName">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/NSLayoutConstraint.h</string>
+					</object>
+				</object>
+			</object>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
@@ -1868,20 +2016,16 @@
 				<string>back-btn@2x.png</string>
 				<string>blitz-btn-sel.png</string>
 				<string>blitz-btn@2x.png</string>
-				<string>blitz-disabled@2x.png</string>
 				<string>easy-btn-sel.png</string>
 				<string>easy-btn@2x.png</string>
 				<string>extreme-btn-sel.png</string>
 				<string>extreme-btn@2x.png</string>
-				<string>extreme-disabled@2x.png</string>
 				<string>hard-btn-sel.png</string>
 				<string>hard-btn@2x.png</string>
-				<string>hard-disabled@2x.png</string>
 				<string>levelSelect-frame@2x.png</string>
 				<string>main-1136@2x.png</string>
 				<string>medium-btn-sel.png</string>
 				<string>medium-btn@2x.png</string>
-				<string>medium-disabled@2x.png</string>
 				<string>shuzzle-small@2x.png</string>
 				<string>timewrap@2x.png</string>
 				<string>well@2x.png</string>
@@ -1892,19 +2036,15 @@
 				<string>{110, 106}</string>
 				<string>{85, 135}</string>
 				<string>{170, 270}</string>
-				<string>{170, 270}</string>
 				<string>{85, 135}</string>
 				<string>{170, 270}</string>
 				<string>{85, 135}</string>
 				<string>{170, 270}</string>
-				<string>{170, 270}</string>
 				<string>{85, 135}</string>
-				<string>{170, 270}</string>
 				<string>{170, 270}</string>
 				<string>{992, 358}</string>
 				<string>{1136, 640}</string>
 				<string>{85, 135}</string>
-				<string>{170, 270}</string>
 				<string>{170, 270}</string>
 				<string>{360, 128}</string>
 				<string>{1304, 1304}</string>

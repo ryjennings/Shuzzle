@@ -32,12 +32,12 @@
 						   otherButtonTitles:@"Resume", nil] autorelease] show];
     [timewarp.layer addAnimation:[AppDelegate rotationAnimation] forKey:@"spin"];
     
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"isGameUnlocked"]) {
-        buttonMedium.enabled = NO;
-        buttonHard.enabled = NO;
-        buttonExtreme.enabled = NO;
-        buttonBlitz.enabled = NO;
-    }
+//    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"isGameUnlocked"]) {
+//        buttonMedium.enabled = NO;
+//        buttonHard.enabled = NO;
+//        buttonExtreme.enabled = NO;
+//        buttonBlitz.enabled = NO;
+//    }
 }
 
 - (void)appDidBecomeActive:(NSNotification *)note {
@@ -86,26 +86,46 @@
 
 - (IBAction)onButtonMedium {
 	[AppDelegate playButtonSound];
-	[[AppDelegate game] setLevel:1];
-	[AppDelegate showFormicView];
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"isGameUnlocked"]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Locked" message:@"This game must be unlocked to access this feature." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    } else {
+        [[AppDelegate game] setLevel:1];
+        [AppDelegate showFormicView];
+    }
 }
 
 - (IBAction)onButtonHard {
 	[AppDelegate playButtonSound];
-	[[AppDelegate game] setLevel:2];
-	[AppDelegate showFormicView];
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"isGameUnlocked"]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Locked" message:@"This game must be unlocked to access this feature." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    } else {
+        [[AppDelegate game] setLevel:2];
+        [AppDelegate showFormicView];
+    }
 }
 
 - (IBAction)onButtonExtreme {
 	[AppDelegate playButtonSound];
-	[[AppDelegate game] setLevel:3];
-	[AppDelegate showFormicView];
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"isGameUnlocked"]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Locked" message:@"This game must be unlocked to access this feature." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    } else {
+        [[AppDelegate game] setLevel:3];
+        [AppDelegate showFormicView];
+    }
 }
 
 - (IBAction)onButtonBlitz {
 	[AppDelegate playButtonSound];
-	[[AppDelegate game] setLevel:4];
-	[AppDelegate showFormicView];
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"isGameUnlocked"]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Locked" message:@"This game must be unlocked to access this feature." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    } else {
+        [[AppDelegate game] setLevel:4];
+        [AppDelegate showFormicView];
+    }
 }
 
 - (IBAction)onButtonBack {
