@@ -21,6 +21,16 @@
     return sharedInstance;
 }
 
+- (void)restorePurchase {
+    NSLog(@"restorePurchase 1");
+    if ([self canMakePurchases]) {
+        NSLog(@"restorePurchase 2");
+        [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
+        NSLog(@"restorePurchase 3");
+    }
+    NSLog(@"restorePurchase 4");
+}
+
 - (void)canUnlock {
     checkRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObject:kInAppPurchaseUnlockedProductId]];
     checkRequest.delegate = self;
@@ -182,6 +192,30 @@
 {
     for (SKPaymentTransaction *transaction in transactions)
     {
+        NSLog(@"transaction.transactionState %d", transaction.transactionState);
+        switch (transaction.transactionState)
+        {
+            case SKPaymentTransactionStatePurchased:
+                [self completeTransaction:transaction];
+                break;
+            case SKPaymentTransactionStateFailed:
+                [self failedTransaction:transaction];
+                break;
+            case SKPaymentTransactionStateRestored:
+                [self restoreTransaction:transaction];
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+- (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
+{
+    NSLog(@"paymentQueueRestoreCompletedTransactionsFinished");
+    for (SKPaymentTransaction *transaction in queue.transactions)
+    {
+        NSLog(@"transaction.transactionState %d", transaction.transactionState);
         switch (transaction.transactionState)
         {
             case SKPaymentTransactionStatePurchased:

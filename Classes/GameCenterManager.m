@@ -78,45 +78,76 @@
  
 	NSLog(@"Submitting achievement %@ %f", identifier, percentComplete);
 	if (self.earnedAchievementCache == NULL) {
+        NSLog(@"1");
 		[GKAchievement loadAchievementsWithCompletionHandler: ^(NSArray *scores, NSError *error)
 		{
+            NSLog(@"2");
 			 if (error == NULL) {
+                 NSLog(@"3");
 				 NSMutableDictionary *tempCache = [NSMutableDictionary dictionaryWithCapacity:[scores count]];
+                 NSLog(@"4");
 				 for (GKAchievement *score in scores) {
+                     NSLog(@"5");
 					 [tempCache setObject:score forKey:score.identifier];
+                     NSLog(@"6");
 				 }
+                 NSLog(@"7");
 				 self.earnedAchievementCache = tempCache;
-				 if (percentComplete != 0)
+                 NSLog(@"8");
+				 if (percentComplete != 0) {
+                     NSLog(@"9");
 					 [self submitAchievement:identifier percentComplete:percentComplete];
+                     NSLog(@"10");
+                 }
+                 NSLog(@"11");
 			 } else {
+                 NSLog(@"12");
 				 // Something broke loading the achievement list. Error out, and we'll try again the next time achievements submit.
-				 [self callDelegateOnMainThread:@selector(achievementSubmitted:error:) withArg:NULL error:error];
-			 }			 
+//				 [self callDelegateOnMainThread:@selector(achievementSubmitted:error:) withArg:NULL error:error];
+                 NSLog(@"13");
+			 }
 		 }];
+        NSLog(@"14");
 	} else {
+        NSLog(@"15");
 		// Search the list for the ID we're using...
 		GKAchievement *achievement = [self.earnedAchievementCache objectForKey:identifier];
+        NSLog(@"16");
 		if (achievement != NULL) {
+            NSLog(@"17");
 			if ((achievement.percentComplete >= 100.0) || (achievement.percentComplete >= percentComplete)) {
+                NSLog(@"18");
 				// Achievement has already been earned so we're done
 				achievement = NULL;
+                NSLog(@"19");
 			}
+            NSLog(@"20");
 			achievement.percentComplete = percentComplete;
+            NSLog(@"21");
 		} else {
+            NSLog(@"22");
 			achievement = [[[GKAchievement alloc] initWithIdentifier:identifier] autorelease];
+            NSLog(@"23");
 			achievement.percentComplete = percentComplete;
+            NSLog(@"24");
 			// Add achievement to achievement cache...
 			[self.earnedAchievementCache setObject:achievement forKey:achievement.identifier];
+            NSLog(@"25");
 		}
+        NSLog(@"26");
 		if (achievement != NULL) {
+            NSLog(@"27");
 			// Submit the achievement...
 			[achievement reportAchievementWithCompletionHandler: ^(NSError *error)
 			 {
+                 NSLog(@"28");
 				 [self callDelegateOnMainThread:@selector(achievementSubmitted:error:) withArg:achievement error:error];
+                 NSLog(@"29");
 			 }];
 		}
 	}
     }
+    NSLog(@"30");
 }
 
 @end

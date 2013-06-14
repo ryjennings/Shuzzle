@@ -8,13 +8,14 @@
 
 #import "SettingsViewController.h"
 #import "FormicAppDelegate.h"
+#import "InAppPurchaseManager.h"
 
 @implementation SettingsViewController
 
 @synthesize settingsTable,buttonBack;
 @synthesize switchMusic, switchEffects, switchVibrate, switchCB, switchAdvanced, volumeSlider;
 @synthesize volumeCell, musicCell, itunesCell, effectsCell, vibrateCell, colorBlindnessCell, advancedCell;
-@synthesize headerOneView, headerTwoView;
+@synthesize headerOneView, headerTwoView, restoreCell;
 
 - (void)viewDidLoad
 {
@@ -43,6 +44,7 @@
 	self.switchCB = nil;
 	self.switchAdvanced = nil;
 	self.volumeCell = nil;
+	self.restoreCell = nil;
 	self.volumeSlider = nil;
 	self.musicCell = nil;
 	self.itunesCell = nil;
@@ -78,8 +80,8 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section==0) return 5;
-	return 2;
+    if (section == 0) return 5;
+	return 3;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -125,6 +127,9 @@
 			case 1:
 				cell = advancedCell;
 				break;
+			case 2:
+				cell = restoreCell;
+				break;
 		}
 	}		
 	return cell;
@@ -137,15 +142,21 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-	if (indexPath.row == 4) {
+	if (indexPath.section == 0 && indexPath.row == 4) {
 		[self showMediaPicker];
+	}
+	if (indexPath.section == 1 && indexPath.row == 2) {
+		[[InAppPurchaseManager sharedInstance] restorePurchase];
 	}
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-	if (indexPath.row == 4) {
+	if (indexPath.section == 0 && indexPath.row == 4) {
 		[self showMediaPicker];
+	}
+	if (indexPath.section == 1 && indexPath.row == 2) {
+		[[InAppPurchaseManager sharedInstance] restorePurchase];
 	}
 }
 

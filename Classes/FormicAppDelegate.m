@@ -550,6 +550,7 @@
 
 - (void)achievementSubmitted:(GKAchievement *)ach error:(NSError *)error
 {
+    NSLog(@"SPECIAL");
 	NSLog(@"achievementSubmitted %@ %f", ach.identifier, ach.percentComplete);
 	if (error == NULL && ach != NULL && ach.identifier != NULL && ach.percentComplete) {
 		[self addToAchievementAnnouncementQueue:ach.identifier];

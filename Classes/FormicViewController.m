@@ -167,9 +167,9 @@
 	[[self view] retain];
 			
 	// for accelerometer
-	UIAccelerometer *accel = [UIAccelerometer sharedAccelerometer];
-	accel.delegate = self;
-	accel.updateInterval = 1.0f/10.0f;
+//	UIAccelerometer *accel = [UIAccelerometer sharedAccelerometer];
+//	accel.delegate = self;
+//	accel.updateInterval = 1.0f/10.0f;
 	
 	accelX = oldX = 0.0;
 	accelY = oldY = 0.0;

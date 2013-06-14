@@ -28,4 +28,6 @@
 - (void)loadStore;
 - (BOOL)canMakePurchases;
 
+- (void)restorePurchase;
+
 @end

@@ -190,6 +190,7 @@
 		9F755CF31318DC6500459FD6 /* uniform.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9F755CD71318DC6000459FD6 /* uniform.caf */; };
 		9F7F70631316E09700605871 /* paused-frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F7F70611316E09700605871 /* paused-frame@2x.png */; };
 		9F82A47811FFA11E00F69F00 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F82A47711FFA11E00F69F00 /* QuartzCore.framework */; };
+		9FA14DA2176AD9340064BC60 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA14DA1176AD9340064BC60 /* AVFoundation.framework */; };
 		9FA9169B124812530018609B /* GameCenterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA9169A124812530018609B /* GameCenterManager.m */; };
 		9FB10C5D11BEB86900459F2A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FB10C5C11BEB86900459F2A /* MediaPlayer.framework */; };
 		9FB10F3511C01C3300459F2A /* RRSGlowLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FB10F3411C01C3300459F2A /* RRSGlowLabel.m */; };
@@ -279,7 +280,6 @@
 		D93033FD11183EAC00DF9424 /* InstructionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93033FB11183EAC00DF9424 /* InstructionsViewController.xib */; };
 		D930340111183EB800DF9424 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93033FF11183EB800DF9424 /* SettingsViewController.m */; };
 		D930340211183EB800DF9424 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D930340011183EB800DF9424 /* SettingsViewController.xib */; };
-		D93035EA1118A1AD00DF9424 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D93035E91118A1AD00DF9424 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -477,6 +477,7 @@
 		9F755CD71318DC6000459FD6 /* uniform.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = uniform.caf; sourceTree = "<group>"; };
 		9F7F70611316E09700605871 /* paused-frame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paused-frame@2x.png"; sourceTree = "<group>"; };
 		9F82A47711FFA11E00F69F00 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		9FA14DA1176AD9340064BC60 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9FA91699124812530018609B /* GameCenterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCenterManager.h; sourceTree = "<group>"; };
 		9FA9169A124812530018609B /* GameCenterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCenterManager.m; sourceTree = "<group>"; };
 		9FA916A61248174F0018609B /* AppSpecificValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSpecificValues.h; sourceTree = "<group>"; };
@@ -582,7 +583,6 @@
 		D93033FE11183EB800DF9424 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		D93033FF11183EB800DF9424 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		D930340011183EB800DF9424 /* SettingsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
-		D93035E91118A1AD00DF9424 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -590,11 +590,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FA14DA2176AD9340064BC60 /* AVFoundation.framework in Frameworks */,
 				9FE2E132174D4EBD0048B664 /* StoreKit.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
-				D93035EA1118A1AD00DF9424 /* AVFoundation.framework in Frameworks */,
 				AABC8AF4113196C700891576 /* AudioToolbox.framework in Frameworks */,
 				9F2F981311B98D4A002BCD86 /* GameKit.framework in Frameworks */,
 				9FB10C5D11BEB86900459F2A /* MediaPlayer.framework in Frameworks */,
@@ -675,12 +675,12 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9FA14DA1176AD9340064BC60 /* AVFoundation.framework */,
 				9FE2E131174D4EBA0048B664 /* StoreKit.framework */,
 				9F82A47711FFA11E00F69F00 /* QuartzCore.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
-				D93035E91118A1AD00DF9424 /* AVFoundation.framework */,
 				AABC8AF3113196C700891576 /* AudioToolbox.framework */,
 				9F2F981211B98D4A002BCD86 /* GameKit.framework */,
 				9FB10C5C11BEB86900459F2A /* MediaPlayer.framework */,
@@ -1137,7 +1137,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Appuous, Inc.";
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Shuzzle" */;
@@ -1483,7 +1483,6 @@
 		9F7CC00911E535AA004DA0C5 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Appuous Inc.";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1514,8 +1513,7 @@
 		AA61460A112EE6B800950332 /* Distribution adhoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_ENTITLEMENTS = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Appuous Inc.";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1546,7 +1544,6 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Austin Evers (A48F2K6NCF)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1561,7 +1558,6 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;

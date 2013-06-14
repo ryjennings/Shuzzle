@@ -26,6 +26,7 @@
 	IBOutlet UITableViewCell *itunesCell;
 	IBOutlet UITableViewCell *effectsCell;
 	IBOutlet UITableViewCell *vibrateCell;
+	IBOutlet UITableViewCell *restoreCell;
 	IBOutlet UITableViewCell *colorBlindnessCell;
 	IBOutlet UITableViewCell *advancedCell;
 	
@@ -41,6 +42,7 @@
 @property (nonatomic, retain) UITableViewCell *itunesCell;
 @property (nonatomic, retain) UITableViewCell *effectsCell;
 @property (nonatomic, retain) UITableViewCell *vibrateCell;
+@property (nonatomic, retain) UITableViewCell *restoreCell;
 @property (nonatomic, retain) UITableViewCell *colorBlindnessCell;
 @property (nonatomic, retain) UITableViewCell *advancedCell;
 

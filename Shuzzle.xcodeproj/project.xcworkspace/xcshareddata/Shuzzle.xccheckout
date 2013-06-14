@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>BE9C77D6-172D-412C-A225-D3F9268DD2B7</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Shuzzle</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>16E5D443-1D49-49B0-88CB-56E15B1C0B24</key>
+		<string>https://github.com/ryjennings/Shuzzle.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Shuzzle.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>16E5D443-1D49-49B0-88CB-56E15B1C0B24</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/ryjennings/Shuzzle.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>16E5D443-1D49-49B0-88CB-56E15B1C0B24</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>16E5D443-1D49-49B0-88CB-56E15B1C0B24</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Shuzzle</string>
+		</dict>
+	</array>
+</dict>
+</plist>
