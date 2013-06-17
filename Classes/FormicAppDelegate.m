@@ -574,7 +574,7 @@
 	isAnnouncingAchievement = YES;
 	AchievementAlertView *achievementAlert = [[AchievementAlertView alloc] initWithAchievement:[achievementAlertQueue objectAtIndex:0]];
 	[achievementAlertQueue removeObjectAtIndex:0];
-	[window addSubview:achievementAlert];
+	[window.rootViewController.view addSubview:achievementAlert];
 	achievementAlert.alpha = 0.0;
 	[UIView animateWithDuration:0.25
 						  delay:0.0

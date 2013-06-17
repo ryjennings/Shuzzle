@@ -74,7 +74,7 @@
 
 - (void)submitAchievement:(NSString *)identifier percentComplete:(double)percentComplete
 {
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"isGameUnlocked"]) {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"isGameUnlocked"]) {
  
 	NSLog(@"Submitting achievement %@ %f", identifier, percentComplete);
 	if (self.earnedAchievementCache == NULL) {

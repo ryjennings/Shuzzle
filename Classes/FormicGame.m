@@ -997,6 +997,7 @@
 
 - (void)checkForGameOverAchievements
 {
+    NSLog(@"checkForGameOverAchievements connectedToGameCenter %@", [NSNumber numberWithBool:[AppDelegate connectedToGameCenter]]);
 	if ([AppDelegate connectedToGameCenter]) {
 		NSLog(@"pu %i %i %i %i %i", powerupUse[FGPowerupRadiation], powerupUse[FGPowerupSlowdown], powerupUse[FGPowerupExtraLife],
 			  powerupUse[FGPowerupUniformity], powerupUse[FGPowerupDoubler]);
@@ -1019,9 +1020,11 @@
 			powerupUse[FGPowerupAutowin] == FGPowerupUnused &&
 			powerupUse[FGPowerupDoubler] == FGPowerupUnused
 			) {
+            NSLog(@"should be submitting eliminator powerup");
 			NSDictionary *earnedAchievements = [AppDelegate checkEarnedAchievements];
 			if ([earnedAchievements objectForKey:kAchievementEliminator] == nil) {
 				// Submit this achievement
+                NSLog(@"submitAchievement");
 				[[AppDelegate gameCenterManager] submitAchievement:kAchievementEliminator percentComplete:100.0];
 			}
 		}

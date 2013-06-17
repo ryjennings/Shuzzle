@@ -129,6 +129,7 @@
 				break;
 			case 2:
 				cell = restoreCell;
+				cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
 				break;
 		}
 	}		

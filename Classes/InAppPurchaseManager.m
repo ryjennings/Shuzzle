@@ -118,6 +118,7 @@
 //
 - (void)provideContent:(NSString *)productId
 {
+    NSLog(@"%@ %@", productId, kInAppPurchaseUnlockedProductId);
     if ([productId isEqualToString:kInAppPurchaseUnlockedProductId]) {
         // enable the pro features
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isGameUnlocked"];
@@ -161,6 +162,9 @@
     [self recordTransaction:transaction.originalTransaction];
     [self provideContent:transaction.originalTransaction.payment.productIdentifier];
     [self finishTransaction:transaction wasSuccessful:YES];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Your purchase has been restored." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+    [alert show];
 }
 
 //
@@ -202,7 +206,7 @@
                 [self failedTransaction:transaction];
                 break;
             case SKPaymentTransactionStateRestored:
-                [self restoreTransaction:transaction];
+//                [self restoreTransaction:transaction];
                 break;
             default:
                 break;

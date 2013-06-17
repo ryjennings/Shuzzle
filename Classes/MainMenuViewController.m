@@ -78,8 +78,9 @@
 
                          }];
     } else {
-        [scrollView scrollRectToVisible:CGRectMake(0.0, 0.0, scrollView.frame.size.width, scrollView.frame.size.height) animated:NO];
-        [self performSelector:@selector(updatePlayNowLabel) withObject:nil afterDelay:5.0];
+//        [scrollView scrollRectToVisible:CGRectMake(0.0, 0.0, scrollView.frame.size.width, scrollView.frame.size.height) animated:NO];
+//        [self performSelector:@selector(updatePlayNowLabel) withObject:nil afterDelay:5.0];
+        [self setupBottomOfScreen];
     }
 }
 
@@ -94,7 +95,12 @@
         unlockGroup.alpha = 0.0;
         playNowGroup.alpha = 1.0;
 //        buttonHighscores.enabled = YES;
-        [self performSelector:@selector(setupScoreboard) withObject:nil afterDelay:0.0];
+        if (!scrollView) {
+            [self performSelector:@selector(setupScoreboard) withObject:nil afterDelay:0.0];
+        } else {
+            [scrollView scrollRectToVisible:CGRectMake(0.0, 0.0, scrollView.frame.size.width, scrollView.frame.size.height) animated:NO];
+            [self performSelector:@selector(updatePlayNowLabel) withObject:nil afterDelay:5.0];
+        }
     } else {
         NSLog(@"GAME IS LOCKED!");
         [self hideErrorLabel];
@@ -450,7 +456,7 @@
 
 - (IBAction)didTapPlayNowButton:(id)sender {
 	[AppDelegate playButtonSound];
-	[[AppDelegate game] setLevel:activeIndex];
+	[[AppDelegate game] setLevel:(activeIndex == -1 ? 0 : activeIndex)];
 	[AppDelegate showFormicView];
 }
 

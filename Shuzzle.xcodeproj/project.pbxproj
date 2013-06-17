@@ -1483,12 +1483,12 @@
 		9F7CC00911E535AA004DA0C5 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Appuous Inc.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Appuous Inc. (ALEG5397F7)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "75FC4205-AAF3-4BD8-9931-801C3A3AA017";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "21BF98A0-1078-49A3-ACB9-5DC1323945F9";
 				SDKROOT = iphoneos;
 			};
 			name = Distribution;
@@ -1514,12 +1514,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Appuous Inc.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Appuous Inc. (ALEG5397F7)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FE9D5D51-344E-4A5F-AB4B-EB6EDAEA206A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A2BBB6EC-BA99-40F7-A3D6-DE126B2CEC44";
 				SDKROOT = iphoneos;
 			};
 			name = "Distribution adhoc";
@@ -1544,13 +1544,13 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Austin Evers (A48F2K6NCF)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ryan Jennings (GWJAT2E275)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
 				ONLY_ACTIVE_ARCH = YES;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BF0A0937-8857-4A0F-988E-F4A1AC9BBC3B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0F436CF8-994C-4905-BFD6-B4E0DFBA30D7";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
