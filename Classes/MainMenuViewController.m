@@ -25,7 +25,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"main menu viewDidLoad");
 }
 
 - (void)showIntroAlert {
@@ -35,7 +34,6 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    NSLog(@"main menu viewWillAppear");
     [super viewWillAppear:animated];
 
     activeIndex = -1;
@@ -91,10 +89,8 @@
 
 - (void)setupBottomOfScreen {
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"isGameUnlocked"]) {
-        NSLog(@"GAME IS UNLOCKED!!!");
         unlockGroup.alpha = 0.0;
         playNowGroup.alpha = 1.0;
-//        buttonHighscores.enabled = YES;
         if (!scrollView) {
             [self performSelector:@selector(setupScoreboard) withObject:nil afterDelay:0.0];
         } else {
@@ -102,11 +98,9 @@
             [self performSelector:@selector(updatePlayNowLabel) withObject:nil afterDelay:5.0];
         }
     } else {
-        NSLog(@"GAME IS LOCKED!");
         [self hideErrorLabel];
         unlockGroup.alpha = 1.0;
         playNowGroup.alpha = 0.0;
-//        buttonHighscores.enabled = NO;
         [[InAppPurchaseManager sharedInstance] canUnlock];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(canMakePurchaseAndProductExists:) name:kInAppPurchaseManagerCanMakePurchaseAndProductExistsNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(canNotMakePurchase:) name:kInAppPurchaseManagerCanNotMakePurchaseNotification object:nil];
@@ -317,7 +311,6 @@
 }
 
 - (void)transactionFailed:(NSNotification *)note {
-    NSLog(@"transactionFailed");
     [UIView animateWithDuration:0.5
                      animations:^{
                          unlockErrorLabel.alpha = 0.0;

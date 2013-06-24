@@ -309,7 +309,6 @@
 			if (mCenter[GAME_COLOR] == GOLDEN_COLOR) {
 				mPoints += (powerupInUse == FGPowerupDoubler) ? 200 : 100;
 				if (mLives == 1) mPointsWithOneLife += (powerupInUse == FGPowerupDoubler) ? 200 : 100;
-				NSLog(@"usedGoldenCircle");
 				usedGoldenCircle = YES;
 				[mController announceGoldenShape];
 			} else {
@@ -329,7 +328,6 @@
 				
 				// Consecutive Doubler match
 				mConsecutiveDouble++;
-				NSLog(@"%i == %i", mConsecutiveDouble, kRequirementDoubleCombos);
 				if (mConsecutiveDouble == kRequirementDoubleCombos && [AppDelegate connectedToGameCenter]) {
 					/* LOGIC FOR DOUBLE COMBOS ACHIEVEMENT */
 					NSDictionary *earnedAchievements = [AppDelegate checkEarnedAchievements];
@@ -359,7 +357,6 @@
 			[mController updateScore:mPoints];
 		} else {
 			if (mCircle[circle][GAME_COLOR] == GOLDEN_COLOR) {
-				NSLog(@"usedGoldenCircle");
 				usedGoldenCircle = YES;
 			}
 			
@@ -525,9 +522,6 @@
 		
 		// Blitz
 		[prefs setObject:[NSNumber numberWithInt:blitzSeconds] forKey:@"blitzseconds"];
-				
-		NSLog(@"powerupSlot %@", powerupSlot);
-		NSLog(@"powerupInSlot %@", powerupInSlot);
 	}
 	else
 		// save the 'no game data' indication to the preferences
@@ -560,9 +554,6 @@
 	
 	[mController restoreSavedPowerups:powerupInSlot];
 	
-	NSLog(@"powerupSlot %@", powerupSlot);
-	NSLog(@"powerupInSlot %@", powerupInSlot);
-
 	mTime = 0;
 	mLives = [prefs integerForKey:@"lives"];
 	mPoints = [prefs integerForKey:@"points"];
@@ -997,10 +988,7 @@
 
 - (void)checkForGameOverAchievements
 {
-    NSLog(@"checkForGameOverAchievements connectedToGameCenter %@", [NSNumber numberWithBool:[AppDelegate connectedToGameCenter]]);
 	if ([AppDelegate connectedToGameCenter]) {
-		NSLog(@"pu %i %i %i %i %i", powerupUse[FGPowerupRadiation], powerupUse[FGPowerupSlowdown], powerupUse[FGPowerupExtraLife],
-			  powerupUse[FGPowerupUniformity], powerupUse[FGPowerupDoubler]);
 		/* LOGIC FOR NO POWERUPS ACHIEVEMENT */
 		if (noPowerupsUsed && mPoints > kRequirementNoPowerups-1) {
 			NSDictionary *earnedAchievements = [AppDelegate checkEarnedAchievements];
@@ -1020,11 +1008,9 @@
 			powerupUse[FGPowerupAutowin] == FGPowerupUnused &&
 			powerupUse[FGPowerupDoubler] == FGPowerupUnused
 			) {
-            NSLog(@"should be submitting eliminator powerup");
 			NSDictionary *earnedAchievements = [AppDelegate checkEarnedAchievements];
 			if ([earnedAchievements objectForKey:kAchievementEliminator] == nil) {
 				// Submit this achievement
-                NSLog(@"submitAchievement");
 				[[AppDelegate gameCenterManager] submitAchievement:kAchievementEliminator percentComplete:100.0];
 			}
 		}

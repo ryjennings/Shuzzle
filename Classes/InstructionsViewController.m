@@ -30,7 +30,6 @@
 	[scrollView addSubview:pg3];
 	[scrollView addSubview:pg4];
 
-	scrollView.delegate = self;
 	pgControl.currentPage = 0;
 	pgControl.numberOfPages = 4;
 	[pgControl addTarget:self action:@selector(pageControlDidChange:) forControlEvents:UIControlEventValueChanged];
@@ -53,10 +52,11 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)aScrollView
 {
+    CGFloat contentSizeWidth = aScrollView.contentSize.width / 4;    
 	if (aScrollView.contentOffset.x == 0) pgControl.currentPage = 0;
-	else if (aScrollView.contentOffset.x == 480) pgControl.currentPage = 1;
-	else if (aScrollView.contentOffset.x == 960) pgControl.currentPage = 2;
-	else if (aScrollView.contentOffset.x == 1440) pgControl.currentPage = 3;
+	else if (aScrollView.contentOffset.x == contentSizeWidth) pgControl.currentPage = 1;
+	else if (aScrollView.contentOffset.x == contentSizeWidth * 2) pgControl.currentPage = 2;
+	else if (aScrollView.contentOffset.x == contentSizeWidth * 3) pgControl.currentPage = 3;
 }
 
 - (void)pageControlDidChange:(id)sender 

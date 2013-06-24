@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad
 {
-	switchMusic.on = ![AppDelegate musicOff];
+//	switchMusic.on = ![AppDelegate musicOff];
 	switchEffects.on = ![AppDelegate effectsOff];
 	switchVibrate.on = ![AppDelegate vibrateOff];
 	switchCB.on = [AppDelegate colorBlindnessOn];
@@ -80,7 +80,7 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) return 5;
+    if (section == 0) return 4;
 	return 3;
 }
 
@@ -106,15 +106,12 @@
 				cell = volumeCell;
 				break;
 			case 1:
-				cell = musicCell;
-				break;
-			case 2:
 				cell = effectsCell;
 				break;
-			case 3:
+			case 2:
 				cell = vibrateCell;
 				break;
-			case 4:
+			case 3:
 				cell = itunesCell;
 				cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
 				break;				

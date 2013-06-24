@@ -175,7 +175,6 @@
 		9F7258211303482C0052EEF2 /* instructions-pg1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F7258171303482C0052EEF2 /* instructions-pg1@2x.png */; };
 		9F7258231303482C0052EEF2 /* instructions-pg2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F7258191303482C0052EEF2 /* instructions-pg2@2x.png */; };
 		9F7258251303482C0052EEF2 /* instructions-pg3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F72581B1303482C0052EEF2 /* instructions-pg3@2x.png */; };
-		9F755CE61318DC6500459FD6 /* back.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9F755CCA1318DC6000459FD6 /* back.mp3 */; };
 		9F755CE81318DC6500459FD6 /* button.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9F755CCC1318DC6000459FD6 /* button.caf */; };
 		9F755CE91318DC6500459FD6 /* clock.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9F755CCD1318DC6000459FD6 /* clock.caf */; };
 		9F755CEA1318DC6500459FD6 /* cping.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9F755CCE1318DC6000459FD6 /* cping.caf */; };
@@ -184,7 +183,6 @@
 		9F755CED1318DC6500459FD6 /* extralife.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9F755CD11318DC6000459FD6 /* extralife.caf */; };
 		9F755CEE1318DC6500459FD6 /* gameover.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9F755CD21318DC6000459FD6 /* gameover.caf */; };
 		9F755CEF1318DC6500459FD6 /* gold.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9F755CD31318DC6000459FD6 /* gold.caf */; };
-		9F755CF01318DC6500459FD6 /* menu.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9F755CD41318DC6000459FD6 /* menu.mp3 */; };
 		9F755CF11318DC6500459FD6 /* move.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9F755CD51318DC6000459FD6 /* move.caf */; };
 		9F755CF21318DC6500459FD6 /* pts.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9F755CD61318DC6000459FD6 /* pts.caf */; };
 		9F755CF31318DC6500459FD6 /* uniform.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9F755CD71318DC6000459FD6 /* uniform.caf */; };
@@ -295,8 +293,6 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Shuzzle_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shuzzle_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9F082D68131830D200455899 /* DemoCountdown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoCountdown.h; sourceTree = "<group>"; };
-		9F082D69131830D200455899 /* DemoCountdown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoCountdown.m; sourceTree = "<group>"; };
 		9F082E07131865E400455899 /* instructions-pg4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "instructions-pg4@2x.png"; sourceTree = "<group>"; };
 		9F082E221318664100455899 /* Shuzzle Lite-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Shuzzle Lite-Info.plist"; sourceTree = "<group>"; };
 		9F08309613188E2000455899 /* DemoExpiredViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoExpiredViewController.h; sourceTree = "<group>"; };
@@ -462,7 +458,6 @@
 		9F7258171303482C0052EEF2 /* instructions-pg1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "instructions-pg1@2x.png"; sourceTree = "<group>"; };
 		9F7258191303482C0052EEF2 /* instructions-pg2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "instructions-pg2@2x.png"; sourceTree = "<group>"; };
 		9F72581B1303482C0052EEF2 /* instructions-pg3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "instructions-pg3@2x.png"; sourceTree = "<group>"; };
-		9F755CCA1318DC6000459FD6 /* back.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = back.mp3; sourceTree = "<group>"; };
 		9F755CCC1318DC6000459FD6 /* button.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = button.caf; sourceTree = "<group>"; };
 		9F755CCD1318DC6000459FD6 /* clock.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = clock.caf; sourceTree = "<group>"; };
 		9F755CCE1318DC6000459FD6 /* cping.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = cping.caf; sourceTree = "<group>"; };
@@ -471,7 +466,6 @@
 		9F755CD11318DC6000459FD6 /* extralife.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = extralife.caf; sourceTree = "<group>"; };
 		9F755CD21318DC6000459FD6 /* gameover.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = gameover.caf; sourceTree = "<group>"; };
 		9F755CD31318DC6000459FD6 /* gold.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = gold.caf; sourceTree = "<group>"; };
-		9F755CD41318DC6000459FD6 /* menu.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = menu.mp3; sourceTree = "<group>"; };
 		9F755CD51318DC6000459FD6 /* move.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = move.caf; sourceTree = "<group>"; };
 		9F755CD61318DC6000459FD6 /* pts.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pts.caf; sourceTree = "<group>"; };
 		9F755CD71318DC6000459FD6 /* uniform.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = uniform.caf; sourceTree = "<group>"; };
@@ -763,8 +757,6 @@
 				9F4CF9D6130A6B6600F0022E /* GameOverPopup.m */,
 				9FB15A8E1317199600590A80 /* PowerupIndicator.h */,
 				9FB15A8F1317199600590A80 /* PowerupIndicator.m */,
-				9F082D68131830D200455899 /* DemoCountdown.h */,
-				9F082D69131830D200455899 /* DemoCountdown.m */,
 			);
 			name = "Customized Views";
 			sourceTree = "<group>";
@@ -890,7 +882,6 @@
 		9F7257D4130346E90052EEF2 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				9F755CCA1318DC6000459FD6 /* back.mp3 */,
 				9F755CCC1318DC6000459FD6 /* button.caf */,
 				9F755CCD1318DC6000459FD6 /* clock.caf */,
 				9F755CCE1318DC6000459FD6 /* cping.caf */,
@@ -899,7 +890,6 @@
 				9F755CD11318DC6000459FD6 /* extralife.caf */,
 				9F755CD21318DC6000459FD6 /* gameover.caf */,
 				9F755CD31318DC6000459FD6 /* gold.caf */,
-				9F755CD41318DC6000459FD6 /* menu.mp3 */,
 				9F755CD51318DC6000459FD6 /* move.caf */,
 				9F755CD61318DC6000459FD6 /* pts.caf */,
 				9F755CD71318DC6000459FD6 /* uniform.caf */,
@@ -1341,7 +1331,6 @@
 				9F7F70631316E09700605871 /* paused-frame@2x.png in Resources */,
 				9FB15A921317199600590A80 /* PowerupIndicator.xib in Resources */,
 				9F082E09131865E400455899 /* instructions-pg4@2x.png in Resources */,
-				9F755CE61318DC6500459FD6 /* back.mp3 in Resources */,
 				9F755CE81318DC6500459FD6 /* button.caf in Resources */,
 				9F755CE91318DC6500459FD6 /* clock.caf in Resources */,
 				9F755CEA1318DC6500459FD6 /* cping.caf in Resources */,
@@ -1350,7 +1339,6 @@
 				9F755CED1318DC6500459FD6 /* extralife.caf in Resources */,
 				9F755CEE1318DC6500459FD6 /* gameover.caf in Resources */,
 				9F755CEF1318DC6500459FD6 /* gold.caf in Resources */,
-				9F755CF01318DC6500459FD6 /* menu.mp3 in Resources */,
 				9F755CF11318DC6500459FD6 /* move.caf in Resources */,
 				9F755CF21318DC6500459FD6 /* pts.caf in Resources */,
 				9F755CF31318DC6500459FD6 /* uniform.caf in Resources */,

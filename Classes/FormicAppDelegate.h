@@ -20,11 +20,6 @@
 @class SettingsViewController;
 @class FormicViewController;
 @class SplashViewController;
-//@class DemoExpiredViewController;
-
-//#ifdef DEMO_MODE
-//@class DemoCountdown;
-//#endif
 
 #define AppDelegate	(FormicAppDelegate *)[[UIApplication sharedApplication] delegate]
 
@@ -74,12 +69,6 @@
 	
 	BOOL connectedToGameCenter;
 	BOOL shouldShowBigShuzzle;
-	
-//#ifdef DEMO_MODE
-//	DemoCountdown *demoCountdown;
-//	int loadedDemoSeconds;
-//	FGDemoStatus demoStatus;
-//#endif
 }
 
 @property (nonatomic, retain) GameCenterManager *gameCenterManager;
@@ -87,12 +76,6 @@
 @property (nonatomic, retain) IBOutlet UIView *loadingView;
 @property (nonatomic, retain) IBOutlet UILabel *loadingLabel;
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-
-//#ifdef DEMO_MODE
-//@property (nonatomic, retain) IBOutlet DemoCountdown *demoCountdown;
-//@property (nonatomic, assign) int loadedDemoSeconds;
-//@property (nonatomic, assign) FGDemoStatus demoStatus;
-//#endif
 
 @property (readonly) FormicGame *game;
 @property (nonatomic, assign) BOOL musicOff;

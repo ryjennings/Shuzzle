@@ -22,13 +22,9 @@
 }
 
 - (void)restorePurchase {
-    NSLog(@"restorePurchase 1");
     if ([self canMakePurchases]) {
-        NSLog(@"restorePurchase 2");
         [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
-        NSLog(@"restorePurchase 3");
     }
-    NSLog(@"restorePurchase 4");
 }
 
 - (void)canUnlock {
@@ -57,10 +53,6 @@
     proUpgradeProduct = [products count] == 1 ? [[products objectAtIndex:0] retain] : nil;
     
     if (proUpgradeProduct) {
-        NSLog(@"Product title: %@" , proUpgradeProduct.localizedTitle);
-        NSLog(@"Product description: %@" , proUpgradeProduct.localizedDescription);
-        NSLog(@"Product price: %@" , proUpgradeProduct.price);
-        NSLog(@"Product id: %@" , proUpgradeProduct.productIdentifier);
         if ([self canMakePurchases]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:kInAppPurchaseManagerCanMakePurchaseAndProductExistsNotification
                                                                 object:self
@@ -74,10 +66,6 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:kInAppPurchaseManagerProductDoesNotExistNotification
                                                             object:self
                                                           userInfo:nil];
-    }
-
-    for (NSString *invalidProductId in response.invalidProductIdentifiers) {
-        NSLog(@"Invalid product id: %@" , invalidProductId);
     }
     
     [checkRequest release];
@@ -118,7 +106,6 @@
 //
 - (void)provideContent:(NSString *)productId
 {
-    NSLog(@"%@ %@", productId, kInAppPurchaseUnlockedProductId);
     if ([productId isEqualToString:kInAppPurchaseUnlockedProductId]) {
         // enable the pro features
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isGameUnlocked"];
@@ -196,7 +183,6 @@
 {
     for (SKPaymentTransaction *transaction in transactions)
     {
-        NSLog(@"transaction.transactionState %d", transaction.transactionState);
         switch (transaction.transactionState)
         {
             case SKPaymentTransactionStatePurchased:
@@ -216,10 +202,8 @@
 
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
 {
-    NSLog(@"paymentQueueRestoreCompletedTransactionsFinished");
     for (SKPaymentTransaction *transaction in queue.transactions)
     {
-        NSLog(@"transaction.transactionState %d", transaction.transactionState);
         switch (transaction.transactionState)
         {
             case SKPaymentTransactionStatePurchased:

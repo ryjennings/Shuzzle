@@ -17,12 +17,7 @@
 #import "SplashViewController.h"
 #import "GameCenterManager.h"
 #import "AchievementAlertView.h"
-//#import "DemoExpiredViewController.h"
 #import "InAppPurchaseManager.h"
-
-//#ifdef DEMO_MODE
-//#import "DemoCountdown.h"
-//#endif
 
 @implementation FormicAppDelegate
 
@@ -34,10 +29,6 @@
 @synthesize controlScheme;
 @synthesize userMediaItemCollection, musicPlayer;
 @synthesize loadingView, loadingLabel;
-
-//#ifdef DEMO_MODE
-//@synthesize demoCountdown, loadedDemoSeconds, demoStatus;
-//#endif
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {
@@ -52,16 +43,14 @@
 
 	achievementAlertQueue = [[NSMutableArray alloc] init];
 
-	backMusicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:
-					   [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"back" ofType:@"mp3"]] error:nil];
-	backMusicPlayer.numberOfLoops = -1;
-	backMusicPlayer.volume = volume;
+	backMusicPlayer = [[AVAudioPlayer alloc] init];
+//	backMusicPlayer.numberOfLoops = -1;
+//	backMusicPlayer.volume = volume;
 	
-	menuMusicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:
-					   [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"menu" ofType:@"mp3"]] error:nil];
-	menuMusicPlayer.numberOfLoops = -1;
-	menuMusicPlayer.volume = volume;
-	[menuMusicPlayer prepareToPlay];
+	menuMusicPlayer = [[AVAudioPlayer alloc] init];
+//	menuMusicPlayer.numberOfLoops = -1;
+//	menuMusicPlayer.volume = volume;
+//	[menuMusicPlayer prepareToPlay];
 	
 //	[menuMusicPlayer playAtTime:menuMusicPlayer.deviceCurrentTime+3.5];
 	 
@@ -87,9 +76,8 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-	NSLog(@"connectivity");
+	NSLog(@"You are connect to the Internet.");
 	if ([GameCenterManager isGameCenterAvailable] && !self.connectedToGameCenter) {
-        NSLog(@"1111111");
 		self.gameCenterManager = [[[GameCenterManager alloc] init] autorelease];
 		[self.gameCenterManager setDelegate:self];
 		[self.gameCenterManager authenticateLocalUser];
@@ -98,14 +86,14 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-	NSLog(@"NO connectivity");
+	NSLog(@"You are not connect to the Internet.");
 	[[[[UIAlertView alloc] initWithTitle:@"Not connected to Internet or Internet connection is weak" 
 								 message:@"You will be unable to earn achievements or submit scores without an active Internet connection."
 								delegate:self 
 					   cancelButtonTitle:@"OK"
 					   otherButtonTitles:nil] autorelease] show];
 	self.connectedToGameCenter = NO;
-	NSLog(@"NOT connected to Game Center");
+	NSLog(@"Therefore you are not connected to Game Center.");
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -116,7 +104,7 @@
 	if (currentViewController == formicViewController && [game mState] == FGGameStateRunning) {
 		[game pauseGame];
 	} else if (currentViewController == mainMenuViewController) {
-		if (!menuMusicPlayer.playing) [menuMusicPlayer play];
+//		if (!menuMusicPlayer.playing) [menuMusicPlayer play];
 	}
 }
 
@@ -285,34 +273,34 @@
 }	
 
 - (void)setMusicOff:(BOOL)val {
-	musicOff = val;
-	if (menuMusicPlayer.playing) {
-		[menuMusicPlayer stop];
-	}
-	else {
-		menuMusicPlayer.currentTime = 0;
-		[menuMusicPlayer play];
-	}
+//	musicOff = val;
+//	if (menuMusicPlayer.playing) {
+//		[menuMusicPlayer stop];
+//	}
+//	else {
+//		menuMusicPlayer.currentTime = 0;
+//		[menuMusicPlayer play];
+//	}
 }
 
 - (void)playMenuMusic:(BOOL)val {
-	if (val && !musicOff) {
-		menuMusicPlayer.currentTime = 0;
-		[menuMusicPlayer play];
-	}
-	else [menuMusicPlayer stop];
+//	if (val && !musicOff) {
+//		menuMusicPlayer.currentTime = 0;
+//		[menuMusicPlayer play];
+//	}
+//	else [menuMusicPlayer stop];
 }
 
 - (void)stopMenuMusic {
-	[menuMusicPlayer stop];
+//	[menuMusicPlayer stop];
 }
 
 - (void)playBackMusic:(BOOL)val {
-	if (val && !musicOff) {
-		backMusicPlayer.currentTime = 0;
-		[backMusicPlayer play];
-	}
-	else [backMusicPlayer stop];
+//	if (val && !musicOff) {
+//		backMusicPlayer.currentTime = 0;
+//		[backMusicPlayer play];
+//	}
+//	else [backMusicPlayer stop];
 }
 
 - (void)playGameOverMusic
@@ -550,8 +538,7 @@
 
 - (void)achievementSubmitted:(GKAchievement *)ach error:(NSError *)error
 {
-    NSLog(@"SPECIAL");
-	NSLog(@"achievementSubmitted %@ %f", ach.identifier, ach.percentComplete);
+	NSLog(@"Achievement submitted: %@ %f", ach.identifier, ach.percentComplete);
 	if (error == NULL && ach != NULL && ach.identifier != NULL && ach.percentComplete) {
 		[self addToAchievementAnnouncementQueue:ach.identifier];
 	}
@@ -560,7 +547,6 @@
 - (void)addToAchievementAnnouncementQueue:(NSString *)identifier
 {
 	if (![achievementAlertQueue containsObject:identifier]) {
-		NSLog(@"addToAchievementAnnouncementQueue");
 		[achievementAlertQueue addObject:identifier];
 		if (!isAnnouncingAchievement) {
 			[self announceNextAchievementInQueue];
@@ -570,7 +556,6 @@
 
 - (void)announceNextAchievementInQueue
 {
-	NSLog(@"announceNextAchievementInQueue");
 	isAnnouncingAchievement = YES;
 	AchievementAlertView *achievementAlert = [[AchievementAlertView alloc] initWithAchievement:[achievementAlertQueue objectAtIndex:0]];
 	[achievementAlertQueue removeObjectAtIndex:0];
@@ -603,7 +588,6 @@
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
 	if (buttonIndex == 1) {
-		NSLog(@"retrying");
 		[self.gameCenterManager authenticateLocalUser];
 	}
 }
@@ -612,12 +596,12 @@
 {
 	if (error == NULL) {
 		if (!self.connectedToGameCenter) {
-			NSLog(@"Connected to Game Center");
+			NSLog(@"Connected to Game Center.");
 			self.connectedToGameCenter = YES;
 //			[GKAchievement resetAchievementsWithCompletionHandler: ^(NSError *error) 
 //			 {
 //			 }];
-//			NSLog(@"Resetting achievements");			
+//			NSLog(@"Resetting achievements.");
 			// We're not actually submitting an achievement, simply loading already won achievements to memory
 			[[AppDelegate gameCenterManager] submitAchievement:kAchievementBackToBack percentComplete:0.0];
 		}
@@ -628,7 +612,7 @@
 											  cancelButtonTitle:@"Cancel"
 											  otherButtonTitles:@"Try Again" , nil] autorelease];
 		[alert show];
-		NSLog(@"NOT connected to Game Center");
+		NSLog(@"You are not connected to Game Center.");
 		self.connectedToGameCenter = NO;
 	}
 }

@@ -57,10 +57,10 @@
 	
 	viewHasAppearedForTheFirstTime = YES;
 	btnPause.enabled = NO;
-	if ([[AppDelegate musicPlayer] playbackState] != MPMusicPlaybackStatePlaying) {
-		[AppDelegate playMenuMusic:NO];
-		[AppDelegate playBackMusic:YES];
-	}
+//	if ([[AppDelegate musicPlayer] playbackState] != MPMusicPlaybackStatePlaying) {
+//		[AppDelegate playMenuMusic:NO];
+//		[AppDelegate playBackMusic:YES];
+//	}
 	[[AppDelegate game] stopTimer];
 	[mTimerView setPosition:0];
 	mCenterView.alpha = 0;
@@ -1081,7 +1081,6 @@
 			btnPowerup3.enabled = NO;
 			break;
 	}
-    NSLog(@"p = %d", p);
 }
 
 - (void)restoreSavedPowerups:(NSArray *)pu
@@ -1273,7 +1272,6 @@
 
 - (void)deactivateLivesCritical
 {
-	NSLog(@"deactivateLivesCritical");
 	pulsingLivesCritical = NO;
 	[UIView beginAnimations:nil context:nil];
 	[UIView setAnimationDuration:1.0];
