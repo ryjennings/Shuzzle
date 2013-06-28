@@ -76,7 +76,6 @@
 		9F2D65E8172C930C00018EAB /* shuzzle-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F2D65E7172C930C00018EAB /* shuzzle-small@2x.png */; };
 		9F2D65EA172C941C00018EAB /* timewrap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F2D65E9172C941C00018EAB /* timewrap@2x.png */; };
 		9F2F981311B98D4A002BCD86 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F2F981211B98D4A002BCD86 /* GameKit.framework */; };
-		9F4099F0131B67E400048D1A /* DemoExpiredViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F08309713188E2000455899 /* DemoExpiredViewController.m */; };
 		9F4CF71E1309C05700F0022E /* piece-4-0-0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F4CF7061309C05700F0022E /* piece-4-0-0@2x.png */; };
 		9F4CF7201309C05700F0022E /* piece-4-0-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F4CF7081309C05700F0022E /* piece-4-0-1@2x.png */; };
 		9F4CF7221309C05700F0022E /* piece-4-1-0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F4CF70A1309C05700F0022E /* piece-4-1-0@2x.png */; };
@@ -295,8 +294,6 @@
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F082E07131865E400455899 /* instructions-pg4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "instructions-pg4@2x.png"; sourceTree = "<group>"; };
 		9F082E221318664100455899 /* Shuzzle Lite-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Shuzzle Lite-Info.plist"; sourceTree = "<group>"; };
-		9F08309613188E2000455899 /* DemoExpiredViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoExpiredViewController.h; sourceTree = "<group>"; };
-		9F08309713188E2000455899 /* DemoExpiredViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoExpiredViewController.m; sourceTree = "<group>"; };
 		9F0D6247130088B400483803 /* AchievementAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AchievementAlertView.h; sourceTree = "<group>"; };
 		9F0D6248130088B500483803 /* AchievementAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AchievementAlertView.m; sourceTree = "<group>"; };
 		9F0D63161300B25300483803 /* com.appuous.Shuzzle.back_to_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = com.appuous.Shuzzle.back_to_back.png; path = Images/Achievements/com.appuous.Shuzzle.back_to_back.png; sourceTree = "<group>"; };
@@ -727,8 +724,6 @@
 				D93033FF11183EB800DF9424 /* SettingsViewController.m */,
 				9FF06E4A11D1C1D300B9C34A /* SplashViewController.h */,
 				9FF06E4B11D1C1D300B9C34A /* SplashViewController.m */,
-				9F08309613188E2000455899 /* DemoExpiredViewController.h */,
-				9F08309713188E2000455899 /* DemoExpiredViewController.m */,
 			);
 			name = "Non-Game View Controllers";
 			sourceTree = "<group>";
@@ -1423,7 +1418,6 @@
 				9F0D6249130088B500483803 /* AchievementAlertView.m in Sources */,
 				9F4CF9D7130A6B6600F0022E /* GameOverPopup.m in Sources */,
 				9FB15A911317199600590A80 /* PowerupIndicator.m in Sources */,
-				9F4099F0131B67E400048D1A /* DemoExpiredViewController.m in Sources */,
 				9FE2E135174D4F0D0048B664 /* InAppPurchaseManager.m in Sources */,
 				9FE2E138174D513C0048B664 /* SKProduct+LocalizedPrice.m in Sources */,
 			);
@@ -1524,7 +1518,7 @@
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = Shuzzle;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A2BBB6EC-BA99-40F7-A3D6-DE126B2CEC44";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0486F952-C30A-43C1-B926-5D36AAF52C9D";
 				SDKROOT = iphoneos;
 			};
 			name = "Distribution adhoc";

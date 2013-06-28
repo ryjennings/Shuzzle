@@ -1,6 +1,3 @@
-//  These constants are defined in iTunesConnect
-
-//Achievement IDs
 #define kAchievementBackToBack @"com.appuous.Shuzzle.back_to_back"
 #define kAchievementConsecutiveCombos @"com.appuous.Shuzzle.consecutive_combos"
 #define kAchievementDoubleCombos @"com.appuous.Shuzzle.double_combos"
@@ -105,14 +102,6 @@ typedef enum {
 	FGStyledPopupStatePause	
 } FGStyledPopupState;
 
-//typedef enum {
-//	FGDemoStatusUnknown,
-//	FGDemoStatusActive,
-//	FGDemoStatusExpired
-//} FGDemoStatus;
-
-// Other definitions
-
 #define GAME_CIRCLES				6
 #define GAME_TIMERSTEPS				25
 #define GAME_POWERUPS				6
@@ -121,7 +110,7 @@ typedef enum {
 #define GAME_SHAPE					1
 #define GAME_MAXCOLORS				4
 #define GAME_MAXSHAPES				6
-#define GAME_MATCHES				2 // 2
+#define GAME_MATCHES				2
 #define GAME_SLOWDOWN				4
 #define GAME_BLITZ_SECONDS			60
 #define GAME_BLITZ_EXTRASECONDS		10
@@ -149,5 +138,3 @@ typedef enum {
 #define ANIM_LONG					1.2
 
 #define PAUSE_BEFORE_COUNTDOWN		0.5
-
-//#define DEMO_SECONDS				601 // 601

@@ -19,7 +19,6 @@
 
 - (void)viewDidLoad
 {
-//	switchMusic.on = ![AppDelegate musicOff];
 	switchEffects.on = ![AppDelegate effectsOff];
 	switchVibrate.on = ![AppDelegate vibrateOff];
 	switchCB.on = [AppDelegate colorBlindnessOn];
@@ -29,9 +28,7 @@
 
 - (void)didReceiveMemoryWarning
 {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];	
-	// Release any cached data, images, etc that aren't in use.
+    [super didReceiveMemoryWarning];
 }
 
 - (void)viewDidUnload
@@ -78,7 +75,6 @@
 }
 
 
-// Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) return 4;
 	return 3;
@@ -94,8 +90,6 @@
 	return nil;
 }	
 
-
-// Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	UITableViewCell *cell = nil;
@@ -133,14 +127,13 @@
 	return cell;
 }
 
-// Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return NO;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-	if (indexPath.section == 0 && indexPath.row == 4) {
+	if (indexPath.section == 0 && indexPath.row == 3) {
 		[self showMediaPicker];
 	}
 	if (indexPath.section == 1 && indexPath.row == 2) {
@@ -150,7 +143,7 @@
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-	if (indexPath.section == 0 && indexPath.row == 4) {
+	if (indexPath.section == 0 && indexPath.row == 3) {
 		[self showMediaPicker];
 	}
 	if (indexPath.section == 1 && indexPath.row == 2) {
@@ -166,7 +159,6 @@
 	picker.allowsPickingMultipleItems = YES;
 	picker.prompt = @"Add songs to play.";
 	[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
-//	[self presentModalViewController:picker animated:YES];
     [self presentViewController:picker animated:YES completion:nil];
 	[picker release];
 }	
@@ -213,7 +205,6 @@
 - (void)mediaPicker:(MPMediaPickerController *)mediaPicker didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection
 {	
 	if ([AppDelegate musicOff] != YES) [AppDelegate setMusicOff:YES];
-//	[self dismissModalViewControllerAnimated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
 	[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
 	[AppDelegate updatePlayerQueueWithMediaCollection:mediaItemCollection];
@@ -222,9 +213,7 @@
 
 - (void)mediaPickerDidCancel:(MPMediaPickerController *)mediaPicker
 {
-//	[self dismissModalViewControllerAnimated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
-
 	[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
 }
 

@@ -48,7 +48,6 @@
 	IBOutlet SettingsViewController *settingsViewController;
 	IBOutlet FormicViewController *formicViewController;
 	IBOutlet SplashViewController *splashViewController;
-//	IBOutlet DemoExpiredViewController *demoExpiredViewController;
 	
 	MPMusicPlayerController *musicPlayer;	
 	MPMediaItemCollection *userMediaItemCollection;
@@ -129,12 +128,10 @@
 - (void)dismissLoadingView;
 - (void)removeLoadingView;
 
-// Achievements
 - (NSDictionary *)checkEarnedAchievements;
 - (void)achievementSubmitted:(GKAchievement *)ach error:(NSError *)error;
 - (void)addToAchievementAnnouncementQueue:(NSString *)identifier;
 - (void)announceNextAchievementInQueue;
-// Leaderboard
 - (void)displayLeaderBoard;
 - (void)showMainMenuViewAndLeaderBoard;
 

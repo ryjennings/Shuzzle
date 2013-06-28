@@ -185,7 +185,7 @@
 
 - (void)newCenterPiece
 {
-        // fade existing one out
+    // fade existing one out
 	[mController zoomOutCenter];
 	
 	if (powerupInUse == FGPowerupUniformity || powerupInUse == FGPowerupAutowin) {
@@ -204,10 +204,10 @@
 	}
 	
 	
-        // display it
+    // display it
 	[mController zoomInCenterwithColor:mCenter[GAME_COLOR] andShape:mCenter[GAME_SHAPE]];
 	
-        // reset the timer
+    // reset the timer
 	mTime = 0;
 	[mController updateTimer:mTime];
 }
@@ -614,10 +614,10 @@
 	
 	if (self.gameLevel == FGGameLevelBlitz) {
 		[self performSelector:@selector(startBlitzTimer) withObject:nil afterDelay:3.1];
-		[mController restoreSavedBackground:[UIImage imageNamed:@"blitz.png"]];
+		[mController restoreSavedBackground:[UIImage imageNamed:@"blitz-1136.png"]];
 		[mController updateLivesWithoutZooming:blitzSeconds];
 	} else {
-		[mController restoreSavedBackground:[UIImage imageNamed:@"main.png"]];
+		[mController restoreSavedBackground:[UIImage imageNamed:@"main-1136.png"]];
 		[mController updateLivesWithoutZooming:mLives];
 	}
 	[mController updateScoreWithoutZooming:mPoints];

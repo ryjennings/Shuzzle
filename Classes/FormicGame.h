@@ -67,8 +67,8 @@
 	// Powerups
 	//
 	FGPowerup powerupInUse;
-	NSMutableArray *powerupSlot; // FGPowerupSlotInactive, FGPowerupSlotActive
-	NSMutableArray *powerupInSlot; // FGPowerupRadiation, etc.
+	NSMutableArray *powerupSlot;            // FGPowerupSlotInactive, FGPowerupSlotActive
+	NSMutableArray *powerupInSlot;          // FGPowerupRadiation, etc.
 	FGPowerupUse powerupUse[GAME_POWERUPS]; // FGPowerupUsed, FGPowerupUnused
 	BOOL noPowerupsUsed;
 }
@@ -134,11 +134,16 @@
 - (void)unfreezeClock;
 - (void)addExtraSeconds;
 
+//
 // Leaderboard
+//
 - (void)authenticateLocalUserAndSubmitScore;
 - (void)submitScore;
 - (void)cleanUpAfterUnsuccessfulScorePost;
+
+//
 // Achievements
+//
 - (void)checkForGameOverAchievements;
 - (void)submitBackToBackAchievement;
 

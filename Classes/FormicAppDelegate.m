@@ -44,16 +44,8 @@
 	achievementAlertQueue = [[NSMutableArray alloc] init];
 
 	backMusicPlayer = [[AVAudioPlayer alloc] init];
-//	backMusicPlayer.numberOfLoops = -1;
-//	backMusicPlayer.volume = volume;
-	
 	menuMusicPlayer = [[AVAudioPlayer alloc] init];
-//	menuMusicPlayer.numberOfLoops = -1;
-//	menuMusicPlayer.volume = volume;
-//	[menuMusicPlayer prepareToPlay];
-	
-//	[menuMusicPlayer playAtTime:menuMusicPlayer.deviceCurrentTime+3.5];
-	 
+
 	game = [[FormicGame alloc] initWithViewController:formicViewController];
 	
 	savedGame = NO;
@@ -76,7 +68,7 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-	NSLog(@"You are connect to the Internet.");
+	NSLog(@"You are connected to the Internet.");
 	if ([GameCenterManager isGameCenterAvailable] && !self.connectedToGameCenter) {
 		self.gameCenterManager = [[[GameCenterManager alloc] init] autorelease];
 		[self.gameCenterManager setDelegate:self];
@@ -103,8 +95,6 @@
 	}
 	if (currentViewController == formicViewController && [game mState] == FGGameStateRunning) {
 		[game pauseGame];
-	} else if (currentViewController == mainMenuViewController) {
-//		if (!menuMusicPlayer.playing) [menuMusicPlayer play];
 	}
 }
 
@@ -267,47 +257,29 @@
 	volume = val;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults setFloat:volume forKey:@"volume"];
-	backMusicPlayer.volume = volume;
-	menuMusicPlayer.volume = volume;
-	musicPlayer.volume = volume;
-}	
+    if (!musicPlayer) {
+        [self createMusicPlayer];
+    }	
+    musicPlayer.volume = volume;
+}
 
 - (void)setMusicOff:(BOOL)val {
-//	musicOff = val;
-//	if (menuMusicPlayer.playing) {
-//		[menuMusicPlayer stop];
-//	}
-//	else {
-//		menuMusicPlayer.currentTime = 0;
-//		[menuMusicPlayer play];
-//	}
 }
 
 - (void)playMenuMusic:(BOOL)val {
-//	if (val && !musicOff) {
-//		menuMusicPlayer.currentTime = 0;
-//		[menuMusicPlayer play];
-//	}
-//	else [menuMusicPlayer stop];
 }
 
 - (void)stopMenuMusic {
-//	[menuMusicPlayer stop];
 }
 
 - (void)playBackMusic:(BOOL)val {
-//	if (val && !musicOff) {
-//		backMusicPlayer.currentTime = 0;
-//		[backMusicPlayer play];
-//	}
-//	else [backMusicPlayer stop];
 }
 
 - (void)playGameOverMusic
 {
-		if (!effectsOff) {
-			[self playSystemSound:@"/gameover.caf"];
-		}
+    if (!effectsOff) {
+        [self playSystemSound:@"/gameover.caf"];
+    }
 }
 
 - (void)playMoveSound
@@ -397,13 +369,20 @@
 - (void)updatePlayerQueueWithMediaCollection:(MPMediaItemCollection *)mediaItemCollection
 {	
 	if (mediaItemCollection) {
-		[self setMusicPlayer:[MPMusicPlayerController applicationMusicPlayer]];
+        if (!musicPlayer) {
+            [self createMusicPlayer];
+        }
 		[self setUserMediaItemCollection:mediaItemCollection];
 		[musicPlayer setQueueWithItemCollection:userMediaItemCollection];
-		[musicPlayer setShuffleMode:MPMusicShuffleModeOff];
-		[musicPlayer setRepeatMode:MPMusicRepeatModeAll];
 		[musicPlayer play];
 	}
+}
+
+- (void)createMusicPlayer
+{
+    [self setMusicPlayer:[MPMusicPlayerController applicationMusicPlayer]];
+    [musicPlayer setShuffleMode:MPMusicShuffleModeOff];
+    [musicPlayer setRepeatMode:MPMusicRepeatModeAll];
 }
 
 #pragma mark -
@@ -495,7 +474,6 @@
 				leaderboardViewController.leaderboardDelegate = self;
 				leaderboardViewController.timeScope = GKLeaderboardTimeScopeAllTime;				 
 				leaderboardViewController.category = nil;
-//				[currentViewController presentModalViewController:leaderboardViewController animated:YES];
                 [currentViewController presentViewController:leaderboardViewController animated:YES completion:nil];
 
 				[self dismissLoadingView];
@@ -508,7 +486,6 @@
 		leaderboardViewController.leaderboardDelegate = self;
 		leaderboardViewController.timeScope = GKLeaderboardTimeScopeAllTime;				 
 		leaderboardViewController.category = nil;		
-//		[currentViewController presentModalViewController:leaderboardViewController animated:YES];
         [currentViewController presentViewController:leaderboardViewController animated:YES completion:nil];
 		[self dismissLoadingView];
 	}	
@@ -516,7 +493,6 @@
 
 - (void)leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController
 {
-//	[currentViewController dismissModalViewControllerAnimated:YES];
     [currentViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -598,10 +574,8 @@
 		if (!self.connectedToGameCenter) {
 			NSLog(@"Connected to Game Center.");
 			self.connectedToGameCenter = YES;
-//			[GKAchievement resetAchievementsWithCompletionHandler: ^(NSError *error) 
-//			 {
-//			 }];
-//			NSLog(@"Resetting achievements.");
+			[GKAchievement resetAchievementsWithCompletionHandler: ^(NSError *error){}];
+			NSLog(@"Resetting achievements.");
 			// We're not actually submitting an achievement, simply loading already won achievements to memory
 			[[AppDelegate gameCenterManager] submitAchievement:kAchievementBackToBack percentComplete:0.0];
 		}

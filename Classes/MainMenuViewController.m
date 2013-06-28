@@ -76,8 +76,6 @@
 
                          }];
     } else {
-//        [scrollView scrollRectToVisible:CGRectMake(0.0, 0.0, scrollView.frame.size.width, scrollView.frame.size.height) animated:NO];
-//        [self performSelector:@selector(updatePlayNowLabel) withObject:nil afterDelay:5.0];
         [self setupBottomOfScreen];
     }
 }
@@ -304,7 +302,6 @@
                      animations:^{
                          unlockGroup.alpha = 0.0;
                          playNowGroup.alpha = 1.0;
-//                         buttonHighscores.enabled = YES;
                      }];
     [self performSelector:@selector(setupScoreboard) withObject:nil afterDelay:0.0];
     self.view.userInteractionEnabled = YES;

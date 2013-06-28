@@ -57,10 +57,6 @@
 	
 	viewHasAppearedForTheFirstTime = YES;
 	btnPause.enabled = NO;
-//	if ([[AppDelegate musicPlayer] playbackState] != MPMusicPlaybackStatePlaying) {
-//		[AppDelegate playMenuMusic:NO];
-//		[AppDelegate playBackMusic:YES];
-//	}
 	[[AppDelegate game] stopTimer];
 	[mTimerView setPosition:0];
 	mCenterView.alpha = 0;
@@ -166,11 +162,6 @@
 	
 	[[self view] retain];
 			
-	// for accelerometer
-//	UIAccelerometer *accel = [UIAccelerometer sharedAccelerometer];
-//	accel.delegate = self;
-//	accel.updateInterval = 1.0f/10.0f;
-	
 	accelX = oldX = 0.0;
 	accelY = oldY = 0.0;
 	xCenter = yCenter = 0;
@@ -209,9 +200,7 @@
                          modeImageView.transform = CGAffineTransformMakeScale(0.7, 0.7);
                          modeImageView.alpha = 0.0;
                      }
-                     completion:^(BOOL finished) {
-//                         [modeImageView removeFromSuperview];
-                     }];
+                     completion:NULL];
 }
 
 - (void)announceGoldenShape
@@ -338,6 +327,8 @@
 				break;
 			case FGPowerupUniformity:
 				powerupIndicator.label.text = @"Uniformity";
+				arrowImage = [UIImage imageNamed:@"puDisplay-arrow-purple.png"];
+				break;
 			case FGPowerupAutowin:
 				powerupIndicator.label.text = @"Autowin";
 				arrowImage = [UIImage imageNamed:@"puDisplay-arrow-purple.png"];
@@ -407,12 +398,6 @@
 	countdownTimer.hidden = NO;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
-    // Release anything that's not essential, such as cached data
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationLandscapeRight);
@@ -461,7 +446,6 @@
 }
 
 - (void)zoomInCenterwithColorStop {
-	//tiltHit = NO;
 	if ([[AppDelegate game] mGameBegin]) {
 		[[AppDelegate game] setMBlocked:NO];
 		[[AppDelegate game] setMGameBegin:NO];
@@ -686,6 +670,8 @@
 - (void)gameOver
 {	
 	[self showGameOverPopup];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    [self endPowerup];
 	[AppDelegate playGameOverMusic];
 	if (consecutiveGames == kRequirementBackToBack) {
 		[[AppDelegate game] submitBackToBackAchievement];

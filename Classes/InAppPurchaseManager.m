@@ -83,7 +83,7 @@
     [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
     
     // get the product description (defined in early sections)
-//    [self canUnlock];
+    // [self canUnlock];
 }
 
 #pragma mark -
@@ -169,8 +169,12 @@
         // this is fine, the user just cancelled, so don’t notify
         [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
     }
+    
     NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:transaction, @"transaction" , nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:kInAppPurchaseManagerTransactionFailedNotification object:self userInfo:userInfo];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:transaction.error.localizedDescription delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+    [alert show];
 }
 
 #pragma mark -

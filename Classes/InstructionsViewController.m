@@ -20,16 +20,27 @@
 	UIImageView *pg2 = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"instructions-pg2"]] autorelease];
 	UIImageView *pg3 = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"instructions-pg3"]] autorelease];
 	UIImageView *pg4 = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"instructions-pg4"]] autorelease];
-	pg1.center = CGPointMake(self.view.frame.size.height / 2, 160.0);
-	pg2.center = CGPointMake(self.view.frame.size.height + (self.view.frame.size.height / 2), 160.0);
-	pg3.center = CGPointMake((self.view.frame.size.height * 2) + (self.view.frame.size.height / 2), 160.0);
-	pg4.center = CGPointMake((self.view.frame.size.height * 3) + (self.view.frame.size.height / 2), 160.0);
-	
+    
+    pg1.frame = CGRectMake(0.0, 0.0, self.view.frame.size.height, self.view.frame.size.width);
+    pg2.frame = CGRectOffset(pg1.frame, self.view.frame.size.height, 0.0);
+    pg3.frame = CGRectOffset(pg1.frame, self.view.frame.size.height * 2, 0.0);
+    pg4.frame = CGRectOffset(pg1.frame, self.view.frame.size.height * 3, 0.0);
+    
+    pg1.contentMode = UIViewContentModeScaleAspectFill;
+    pg2.contentMode = UIViewContentModeScaleAspectFill;
+    pg3.contentMode = UIViewContentModeScaleAspectFill;
+    pg4.contentMode = UIViewContentModeScaleAspectFill;
+    
+    pg1.clipsToBounds = YES;
+    pg2.clipsToBounds = YES;
+    pg3.clipsToBounds = YES;
+    pg4.clipsToBounds = YES;
+    
 	[scrollView addSubview:pg1];
 	[scrollView addSubview:pg2];
 	[scrollView addSubview:pg3];
 	[scrollView addSubview:pg4];
-
+    
 	pgControl.currentPage = 0;
 	pgControl.numberOfPages = 4;
 	[pgControl addTarget:self action:@selector(pageControlDidChange:) forControlEvents:UIControlEventValueChanged];

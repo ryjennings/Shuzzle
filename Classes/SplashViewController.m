@@ -13,14 +13,7 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-	
-//	[UIView beginAnimations:nil context:nil];
-//	[UIView setAnimationDuration:0.5];
-//	[UIView setAnimationDelay:1.0];
-//	appuousView.alpha = 0;
-//	[UIView commitAnimations];
-//
+    [super viewDidLoad];	
     [AppDelegate setShouldShowBigShuzzle:YES];
 	[self performSelector:@selector(showMainMenuView) withObject:nil afterDelay:1.5];
 }
