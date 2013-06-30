@@ -67,6 +67,7 @@
 	BOOL isAnnouncingAchievement;
 	
 	BOOL connectedToGameCenter;
+    BOOL cannotLoadLeaderboard;
 	BOOL shouldShowBigShuzzle;
 }
 
@@ -85,6 +86,7 @@
 @property (nonatomic, assign) BOOL savedGame;
 
 @property (nonatomic, assign) BOOL connectedToGameCenter;
+@property (nonatomic, assign) BOOL cannotLoadLeaderboard;
 @property (nonatomic, assign) BOOL shouldShowBigShuzzle;
 
 @property (nonatomic, retain) MPMusicPlayerController *musicPlayer;

@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1552</int>
-		<string key="IBDocument.SystemVersion">12D78</string>
+		<string key="IBDocument.SystemVersion">12E55</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
-		<string key="IBDocument.AppKitVersion">1187.37</string>
+		<string key="IBDocument.AppKitVersion">1187.39</string>
 		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -89,7 +89,25 @@
 					<int key="IBUIInterfaceOrientation">1</int>
 					<int key="interfaceOrientation">1</int>
 				</object>
-				<reference key="IBUISimulatedDestinationMetrics" ref="140221229"/>
+				<object class="IBUIScreenMetrics" key="IBUISimulatedDestinationMetrics">
+					<string key="IBUISimulatedSizeMetricsClass">IBUIScreenMetrics</string>
+					<object class="NSMutableDictionary" key="IBUINormalizedOrientationToSizeMap">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<integer value="1"/>
+							<integer value="3"/>
+						</object>
+						<object class="NSArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>{320, 480}</string>
+							<string>{480, 320}</string>
+						</object>
+					</object>
+					<string key="IBUITargetRuntime">IBCocoaTouchFramework</string>
+					<string key="IBUIDisplayName">Retina 3.5 Full Screen</string>
+					<int key="IBUIType">0</int>
+				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<bool key="IBUIHorizontal">NO</bool>
 			</object>
@@ -474,6 +492,7 @@
 							<string>livesCritical</string>
 							<string>lowerLabel</string>
 							<string>mainBackground</string>
+							<string>modeImageView</string>
 							<string>powerupIndicator</string>
 							<string>scoreCritical</string>
 							<string>timewarp</string>
@@ -489,6 +508,7 @@
 							<string>GameOverPopup</string>
 							<string>UIImageView</string>
 							<string>UILabel</string>
+							<string>UIImageView</string>
 							<string>UIImageView</string>
 							<string>PowerupIndicator</string>
 							<string>UIImageView</string>
@@ -509,6 +529,7 @@
 							<string>livesCritical</string>
 							<string>lowerLabel</string>
 							<string>mainBackground</string>
+							<string>modeImageView</string>
 							<string>powerupIndicator</string>
 							<string>scoreCritical</string>
 							<string>timewarp</string>
@@ -553,6 +574,10 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">mainBackground</string>
+								<string key="candidateClassName">UIImageView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">modeImageView</string>
 								<string key="candidateClassName">UIImageView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
@@ -849,6 +874,8 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>didTapPlayNowButton:</string>
+							<string>didTapUnlockButton:</string>
 							<string>onButtonHighscores</string>
 							<string>onButtonInstructions</string>
 							<string>onButtonPlay</string>
@@ -856,6 +883,8 @@
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -866,6 +895,8 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>didTapPlayNowButton:</string>
+							<string>didTapUnlockButton:</string>
 							<string>onButtonHighscores</string>
 							<string>onButtonInstructions</string>
 							<string>onButtonPlay</string>
@@ -873,6 +904,14 @@
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBActionInfo">
+								<string key="name">didTapPlayNowButton:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">didTapUnlockButton:</string>
+								<string key="candidateClassName">id</string>
+							</object>
 							<object class="IBActionInfo">
 								<string key="name">onButtonHighscores</string>
 								<string key="candidateClassName">id</string>
@@ -899,12 +938,12 @@
 							<string>buttonInstructions</string>
 							<string>buttonPlay</string>
 							<string>buttonSettings</string>
-							<string>playLeadingConstraint</string>
-							<string>playTrailingConstraint</string>
-							<string>playWidthConstraint</string>
-							<string>scoresLeadingConstraint</string>
-							<string>scoresTrailingConstraint</string>
-							<string>scoresWidthConstraint</string>
+							<string>instructionsWell</string>
+							<string>mainButtons</string>
+							<string>playNowGroup</string>
+							<string>settingsWell</string>
+							<string>shuzzleBig</string>
+							<string>shuzzleSmall</string>
 							<string>timewarp</string>
 							<string>unlockButton</string>
 							<string>unlockErrorLabel</string>
@@ -917,12 +956,12 @@
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
-							<string>NSLayoutConstraint</string>
-							<string>NSLayoutConstraint</string>
-							<string>NSLayoutConstraint</string>
-							<string>NSLayoutConstraint</string>
-							<string>NSLayoutConstraint</string>
-							<string>NSLayoutConstraint</string>
+							<string>UIImageView</string>
+							<string>UIView</string>
+							<string>UIView</string>
+							<string>UIImageView</string>
+							<string>UIImageView</string>
+							<string>UIImageView</string>
 							<string>UIImageView</string>
 							<string>UIButton</string>
 							<string>UILabel</string>
@@ -938,12 +977,12 @@
 							<string>buttonInstructions</string>
 							<string>buttonPlay</string>
 							<string>buttonSettings</string>
-							<string>playLeadingConstraint</string>
-							<string>playTrailingConstraint</string>
-							<string>playWidthConstraint</string>
-							<string>scoresLeadingConstraint</string>
-							<string>scoresTrailingConstraint</string>
-							<string>scoresWidthConstraint</string>
+							<string>instructionsWell</string>
+							<string>mainButtons</string>
+							<string>playNowGroup</string>
+							<string>settingsWell</string>
+							<string>shuzzleBig</string>
+							<string>shuzzleSmall</string>
 							<string>timewarp</string>
 							<string>unlockButton</string>
 							<string>unlockErrorLabel</string>
@@ -969,28 +1008,28 @@
 								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">playLeadingConstraint</string>
-								<string key="candidateClassName">NSLayoutConstraint</string>
+								<string key="name">instructionsWell</string>
+								<string key="candidateClassName">UIImageView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">playTrailingConstraint</string>
-								<string key="candidateClassName">NSLayoutConstraint</string>
+								<string key="name">mainButtons</string>
+								<string key="candidateClassName">UIView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">playWidthConstraint</string>
-								<string key="candidateClassName">NSLayoutConstraint</string>
+								<string key="name">playNowGroup</string>
+								<string key="candidateClassName">UIView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">scoresLeadingConstraint</string>
-								<string key="candidateClassName">NSLayoutConstraint</string>
+								<string key="name">settingsWell</string>
+								<string key="candidateClassName">UIImageView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">scoresTrailingConstraint</string>
-								<string key="candidateClassName">NSLayoutConstraint</string>
+								<string key="name">shuzzleBig</string>
+								<string key="candidateClassName">UIImageView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">scoresWidthConstraint</string>
-								<string key="candidateClassName">NSLayoutConstraint</string>
+								<string key="name">shuzzleSmall</string>
+								<string key="candidateClassName">UIImageView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">timewarp</string>
@@ -1017,14 +1056,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/MainMenuViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSLayoutConstraint</string>
-					<string key="superclassName">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/NSLayoutConstraint.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -1142,6 +1173,7 @@
 							<string>headerTwoView</string>
 							<string>itunesCell</string>
 							<string>musicCell</string>
+							<string>restoreCell</string>
 							<string>settingsTable</string>
 							<string>switchAdvanced</string>
 							<string>switchCB</string>
@@ -1160,6 +1192,7 @@
 							<string>UITableViewCell</string>
 							<string>UIView</string>
 							<string>UIView</string>
+							<string>UITableViewCell</string>
 							<string>UITableViewCell</string>
 							<string>UITableViewCell</string>
 							<string>UITableView</string>
@@ -1185,6 +1218,7 @@
 							<string>headerTwoView</string>
 							<string>itunesCell</string>
 							<string>musicCell</string>
+							<string>restoreCell</string>
 							<string>settingsTable</string>
 							<string>switchAdvanced</string>
 							<string>switchCB</string>
@@ -1227,6 +1261,10 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">musicCell</string>
+								<string key="candidateClassName">UITableViewCell</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">restoreCell</string>
 								<string key="candidateClassName">UITableViewCell</string>
 							</object>
 							<object class="IBToOneOutletInfo">

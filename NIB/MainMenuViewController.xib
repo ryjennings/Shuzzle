@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1552</int>
-		<string key="IBDocument.SystemVersion">12D78</string>
+		<string key="IBDocument.SystemVersion">12E55</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
-		<string key="IBDocument.AppKitVersion">1187.37</string>
+		<string key="IBDocument.AppKitVersion">1187.39</string>
 		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -45,7 +45,7 @@
 					<object class="IBUIImageView" id="819578320">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">256</int>
-						<string key="NSFrameSize">{568, 320}</string>
+						<string key="NSFrameSize">{480, 320}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="340889831"/>
@@ -62,7 +62,7 @@
 					<object class="IBUIImageView" id="667747322">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{-368, -492}, {1304, 1304}}</string>
+						<string key="NSFrame">{{-412, -492}, {1304, 1304}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="350032692"/>
@@ -136,7 +136,7 @@
 					<object class="IBUIImageView" id="386973939">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{475, 0}, {98, 98}}</string>
+						<string key="NSFrame">{{387, 0}, {98, 98}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="279986919"/>
@@ -150,10 +150,9 @@
 					<object class="IBUIButton" id="553223683">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{497, 20}, {55, 53}}</string>
+						<string key="NSFrame">{{409, 20}, {55, 53}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -264,7 +263,7 @@
 								<reference key="IBUIFont" ref="581576819"/>
 							</object>
 						</object>
-						<string key="NSFrame">{{94, 69}, {380, 181}}</string>
+						<string key="NSFrame">{{50, 69}, {380, 181}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="481234074"/>
@@ -278,7 +277,7 @@
 					<object class="IBUIImageView" id="748493220">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{194, 15}, {180, 64}}</string>
+						<string key="NSFrame">{{150, 15}, {180, 64}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="553223683"/>
@@ -405,7 +404,7 @@ IQ</string>
 								<double key="preferredMaxLayoutWidth">334</double>
 							</object>
 						</object>
-						<string key="NSFrame">{{84, 242}, {400, 78}}</string>
+						<string key="NSFrame">{{40, 242}, {400, 78}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="198463745"/>
@@ -431,7 +430,7 @@ IQ</string>
 								<reference key="IBUIImage" ref="177204826"/>
 							</object>
 						</object>
-						<string key="NSFrame">{{84, 242}, {400, 78}}</string>
+						<string key="NSFrame">{{40, 242}, {400, 78}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="449533481"/>
@@ -442,7 +441,7 @@ IQ</string>
 					<object class="IBUIImageView" id="163712324">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{77, 93}, {414, 134}}</string>
+						<string key="NSFrame">{{33, 93}, {414, 134}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="386973939"/>
@@ -455,7 +454,7 @@ IQ</string>
 						</object>
 					</object>
 				</object>
-				<string key="NSFrameSize">{568, 320}</string>
+				<string key="NSFrameSize">{480, 320}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="667747322"/>
@@ -481,13 +480,13 @@ IQ</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>{320, 568}</string>
-							<string>{568, 320}</string>
+							<string>{320, 480}</string>
+							<string>{480, 320}</string>
 						</object>
 					</object>
 					<string key="IBUITargetRuntime">IBCocoaTouchFramework</string>
-					<string key="IBUIDisplayName">Retina 4 Full Screen</string>
-					<int key="IBUIType">2</int>
+					<string key="IBUIDisplayName">Retina 3.5 Full Screen</string>
+					<int key="IBUIType">0</int>
 				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
@@ -2894,13 +2893,7 @@ IQ</string>
 							<string>buttonSettings</string>
 							<string>instructionsWell</string>
 							<string>mainButtons</string>
-							<string>playLeadingConstraint</string>
 							<string>playNowGroup</string>
-							<string>playTrailingConstraint</string>
-							<string>playWidthConstraint</string>
-							<string>scoresLeadingConstraint</string>
-							<string>scoresTrailingConstraint</string>
-							<string>scoresWidthConstraint</string>
 							<string>settingsWell</string>
 							<string>shuzzleBig</string>
 							<string>shuzzleSmall</string>
@@ -2918,13 +2911,7 @@ IQ</string>
 							<string>UIButton</string>
 							<string>UIImageView</string>
 							<string>UIView</string>
-							<string>NSLayoutConstraint</string>
 							<string>UIView</string>
-							<string>NSLayoutConstraint</string>
-							<string>NSLayoutConstraint</string>
-							<string>NSLayoutConstraint</string>
-							<string>NSLayoutConstraint</string>
-							<string>NSLayoutConstraint</string>
 							<string>UIImageView</string>
 							<string>UIImageView</string>
 							<string>UIImageView</string>
@@ -2945,13 +2932,7 @@ IQ</string>
 							<string>buttonSettings</string>
 							<string>instructionsWell</string>
 							<string>mainButtons</string>
-							<string>playLeadingConstraint</string>
 							<string>playNowGroup</string>
-							<string>playTrailingConstraint</string>
-							<string>playWidthConstraint</string>
-							<string>scoresLeadingConstraint</string>
-							<string>scoresTrailingConstraint</string>
-							<string>scoresWidthConstraint</string>
 							<string>settingsWell</string>
 							<string>shuzzleBig</string>
 							<string>shuzzleSmall</string>
@@ -2988,32 +2969,8 @@ IQ</string>
 								<string key="candidateClassName">UIView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">playLeadingConstraint</string>
-								<string key="candidateClassName">NSLayoutConstraint</string>
-							</object>
-							<object class="IBToOneOutletInfo">
 								<string key="name">playNowGroup</string>
 								<string key="candidateClassName">UIView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">playTrailingConstraint</string>
-								<string key="candidateClassName">NSLayoutConstraint</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">playWidthConstraint</string>
-								<string key="candidateClassName">NSLayoutConstraint</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">scoresLeadingConstraint</string>
-								<string key="candidateClassName">NSLayoutConstraint</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">scoresTrailingConstraint</string>
-								<string key="candidateClassName">NSLayoutConstraint</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">scoresWidthConstraint</string>
-								<string key="candidateClassName">NSLayoutConstraint</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">settingsWell</string>

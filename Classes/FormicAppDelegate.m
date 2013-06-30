@@ -21,7 +21,7 @@
 
 @implementation FormicAppDelegate
 
-@synthesize gameCenterManager, connectedToGameCenter, shouldShowBigShuzzle;
+@synthesize gameCenterManager, connectedToGameCenter, cannotLoadLeaderboard, shouldShowBigShuzzle;
 @synthesize window;
 @synthesize game;
 @synthesize volume, musicOff, effectsOff, vibrateOff, colorBlindnessOn, advancedPieceOn;
@@ -36,6 +36,7 @@
 	[window makeKeyAndVisible];
     
     self.shouldShowBigShuzzle = NO;
+    self.cannotLoadLeaderboard = NO;
 	
 	[self readDefaults];
 		
@@ -56,6 +57,8 @@
 	currentViewController.view.userInteractionEnabled = YES;
     
     [[InAppPurchaseManager sharedInstance] loadStore];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(leaderboardViewControllerDidFinish:) name:@"CanceledGameCenterAuthentication" object:nil];
 }
 
 - (void)checkForInternetConnection
@@ -493,6 +496,17 @@
 
 - (void)leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController
 {
+    currentViewController.view.alpha = 0.0;
+        
+    mainMenuViewController = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:[NSBundle mainBundle]];
+    showViewController = mainMenuViewController;
+    
+    double delayInSeconds = 0.25;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self hideDidStop:nil finished:nil context:nil];
+    });
+    
     [currentViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -574,8 +588,8 @@
 		if (!self.connectedToGameCenter) {
 			NSLog(@"Connected to Game Center.");
 			self.connectedToGameCenter = YES;
-			[GKAchievement resetAchievementsWithCompletionHandler: ^(NSError *error){}];
-			NSLog(@"Resetting achievements.");
+//			[GKAchievement resetAchievementsWithCompletionHandler: ^(NSError *error){}];
+//			NSLog(@"Resetting achievements.");
 			// We're not actually submitting an achievement, simply loading already won achievements to memory
 			[[AppDelegate gameCenterManager] submitAchievement:kAchievementBackToBack percentComplete:0.0];
 		}

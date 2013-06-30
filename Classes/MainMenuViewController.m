@@ -12,15 +12,6 @@
 #import "InAppPurchaseManager.h"
 #import "FormicGame.h"
 
-@interface MainMenuViewController ()
-@property (nonatomic, retain) IBOutlet NSLayoutConstraint *playWidthConstraint;
-@property (nonatomic, retain) IBOutlet NSLayoutConstraint *playLeadingConstraint;
-@property (nonatomic, retain) IBOutlet NSLayoutConstraint *playTrailingConstraint;
-@property (nonatomic, retain) IBOutlet NSLayoutConstraint *scoresWidthConstraint;
-@property (nonatomic, retain) IBOutlet NSLayoutConstraint *scoresLeadingConstraint;
-@property (nonatomic, retain) IBOutlet NSLayoutConstraint *scoresTrailingConstraint;
-@end
-
 @implementation MainMenuViewController
 
 - (void)viewDidLoad {
@@ -76,6 +67,7 @@
 
                          }];
     } else {
+        shuzzleBig.alpha = 0.0;
         [self setupBottomOfScreen];
     }
 }
@@ -411,6 +403,11 @@
 }
 
 - (IBAction)onButtonHighscores {
+    if (![GKLocalPlayer localPlayer].authenticated) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"You are currently logged out of Game Center. Go to the Game Center app to log in." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"isGameUnlocked"]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Locked" message:@"This game must be unlocked to access this feature." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];

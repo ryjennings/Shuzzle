@@ -8,6 +8,7 @@
 
 #import "GameCenterManager.h"
 #import <GameKit/GameKit.h>
+#import "FormicAppDelegate.h"
 
 @implementation GameCenterManager
 
@@ -63,9 +64,19 @@
 - (void)authenticateLocalUser
 {
 	if ([GKLocalPlayer localPlayer].authenticated == NO) {
+        UIWindow *window = [[UIApplication sharedApplication] keyWindow];
         [[GKLocalPlayer localPlayer] setAuthenticateHandler:^(UIViewController *viewcontroller, NSError *error) {
-            if (!error) {
-			 [self callDelegateOnMainThread:@selector(processGameCenterAuth:) withArg:NULL error:error];
+            if (viewcontroller) {
+                [window.rootViewController presentViewController:viewcontroller animated:YES completion:^{
+                    window.rootViewController.view.alpha = 0.0;
+                }];
+            } else if ([GKLocalPlayer localPlayer].isAuthenticated) {
+                [self callDelegateOnMainThread:@selector(processGameCenterAuth:) withArg:NULL error:error];
+            } else {
+                if (![GKLocalPlayer localPlayer].authenticated) {
+                    [AppDelegate setCannotLoadLeaderboard:YES];
+                }
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"CanceledGameCenterAuthentication" object:nil];
             }
 		 }];
 	}
