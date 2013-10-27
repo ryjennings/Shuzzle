@@ -668,6 +668,7 @@
 	// Achievement tracking variables
 	mPointsWithOneLife = 0;
 	mConsecutive = 0;
+    mConsecutiveShapeOnly = 0;
 	mConsecutiveDouble = 0;
 	playingNthGame = FALSE;
 	consecutiveCombosAchieved = FALSE;
